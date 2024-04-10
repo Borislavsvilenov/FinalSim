@@ -1,5 +1,7 @@
 #pragma once
 #include <raylib.h>
+#include "../screenAssist.hpp"
+#include <iostream>
 
 class Particle
 {
