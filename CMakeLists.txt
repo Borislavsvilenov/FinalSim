@@ -9,6 +9,7 @@ include(CTest)
 enable_testing()
 
 add_executable(Sim main.cpp
+	             screenAssist.hpp
 	             screenAssist.cpp
                objects/Particle.hpp
                objects/Particle.cpp)

@@ -1,5 +1,4 @@
-#pragma once
-#include <raylib.h>
+#include "screenAssist.hpp"
 
 Vector2 calculateScreenPos(Vector2 pos, Vector2 cam)
 {
