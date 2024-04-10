@@ -3,8 +3,10 @@
 #include <vector>
 #include <cmath>
 
-#include "objects/Particle.hpp"
 #include "screenAssist.hpp"
+#include "objects/Particle.hpp"
+
+using namespace std;
 
 int main()
 {
@@ -22,6 +24,11 @@ int main()
 		ClearBackground(BLACK);
 
 		drawBounds(simS, Camera);
+
+		for(Particle p : particles)
+		{
+			p.draw(Camera);
+		}
 
 		EndDrawing();
 	}
