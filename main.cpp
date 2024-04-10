@@ -18,7 +18,7 @@ int main()
 
 	vector<Particle> particles;
 
-	particles.push_back(Particle({0, 0}, {1, 1}, {0, 0}, 1, 5, RED));
+	particles.push_back(Particle({0, 0}, {0, 0}, {5, 0}, 1, 5, RED));
 	particles.push_back(Particle({100, 100}, {0, 0}, {0, 0}, 1, 5, GREEN));
 	particles.push_back(Particle({-100, -100}, {0, 0}, {0, 0}, 1, 5, BLUE));
 

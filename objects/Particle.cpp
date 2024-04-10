@@ -18,8 +18,6 @@ void Particle::update(float dt)
 	vel.y += acc.y * dt;
 	pos.x += vel.x * dt;
 	pos.y += vel.y * dt;
-
-
 }
 
 void Particle::draw(Vector2 cam)
