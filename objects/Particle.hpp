@@ -14,6 +14,8 @@ public:
 	Color color;
 
 	Particle(Vector2 p, Vector2 v, Vector2 a, float m, float r, Color c);
+	~Particle();
+
 	void update(float dt);
 	void draw(Vector2 cam);
 };

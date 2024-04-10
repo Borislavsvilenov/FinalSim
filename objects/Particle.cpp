@@ -12,6 +12,11 @@ Particle::Particle(Vector2 p, Vector2 v, Vector2 a, float m, float r, Color c)
 	color = c;
 }
 
+Particle::~Particle()
+{
+
+}
+
 void Particle::update(float dt)
 {
 	vel.x += acc.x * dt;
