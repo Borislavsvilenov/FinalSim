@@ -12,8 +12,10 @@ Particle::Particle(Vector2 p, Vector2 v, Vector2 a, float m, float r, Color c)
 
 void Particle::update(float dt)
 {
-	vel += acc * dt;
-	pos += vel * dt;
+	vel.x += acc.x * dt;
+	vel.y += acc.y * dt;
+	pos.x += vel.x * dt;
+	pos.y += vel.y * dt;
 }
 
 void Particle::draw(Vector2 cam)
