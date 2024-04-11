@@ -73,7 +73,7 @@ void Particle::performCollision(Particle* other, Vector2 diff, float dist)
 	Vector2 normal = {diff.x / dist, diff.y / dist};
 	Vector2 relVel = {vel.x - other->vel.x, vel.y - other->vel.y};
 
-	float velDot = relVel.x / normal.x + relVel.y / normal.y;
+	float velDot = relVel.x * normal.x + relVel.y * normal.y;
 
 	float totMass = mass + other->mass;
 
