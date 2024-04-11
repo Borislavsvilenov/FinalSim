@@ -59,8 +59,13 @@ void Particle::enforceBounds(Vector2 bounds)
 
 void Particle::checkCollision(Particle* other)
 {
-	Vector2 diff = {pos.x - other->pos.x, pos.y - other->pos.y};
-	float dist = sqrt(diff.x * diff.x + diff.y * diff.y);
+	Vector2 diff = {other->pos.x - pos.x, other->pos.y - pos.y};
+  float dist = sqrt(diff.x * diff.x + diff.y * diff.y);
+
+	if (dist < std::numeric_limits<float>::epsilon()) {
+    return;
+	}
+
 	if(dist < radius + other->radius)
 	{
 		performCollision(other, diff, dist);
@@ -69,25 +74,31 @@ void Particle::checkCollision(Particle* other)
 
 void Particle::performCollision(Particle* other, Vector2 diff, float dist)
 {
-	float overlap = (radius + other->radius - dist) / 2;
-	Vector2 normal = {diff.x / dist, diff.y / dist};
-	Vector2 relVel = {vel.x - other->vel.x, vel.y - other->vel.y};
+	float restitution = 1.0;
+	float overlap = (radius + other->radius) - dist;
+  Vector2 normal = {diff.x / dist, diff.y / dist};
 
-	float velDot = relVel.x * normal.x + relVel.y * normal.y;
+	pos.x -= normal.x * overlap / 2;
+	pos.y -= normal.y * overlap / 2;
 
-	float totMass = mass + other->mass;
+	other->pos.x += normal.x * overlap / 2;
+	other->pos.y += normal.y * overlap / 2;
 
-	pos.x += normal.x * overlap;
-	pos.y += normal.y * overlap;
+  Vector2 relVel = {other->vel.x - vel.x, other->vel.y - vel.y};
+  float velAlongNormal = relVel.x * normal.x + relVel.y * normal.y;
 
-	other->pos.x -= normal.x * overlap;
-	other->pos.y -= normal.y * overlap;
+  if (velAlongNormal > 0) {
+    return;
+  }
 
-	vel.x -= normal.x * velDot * (totMass - other->mass) / totMass;
-	vel.y -= normal.y * velDot * (totMass - other->mass) / totMass;
+  float j = -(1 + restitution) * velAlongNormal;
+  j /= (1 / mass + 1 / other->mass);
 
-	other->vel.x += normal.x * velDot * (totMass - mass) / totMass;
-	other->vel.y += normal.y * velDot * (totMass - mass) / totMass;
+  vel.x -= j / mass * normal.x;
+  vel.y -= j / mass * normal.y;
+
+  other->vel.x += j / other->mass * normal.x;
+  other->vel.y += j / other->mass * normal.y;
 }
 
 void Particle::draw(Vector2 cam)
