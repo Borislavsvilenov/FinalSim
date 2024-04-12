@@ -13,12 +13,7 @@ Vector2 calculateScreenPos(Vector2 pos, Vector2 cam)
 void drawBounds(Vector2 simS, Vector2 cam)
 {
 	Vector2 origin1 = calculateScreenPos({-simS.x / 2, -simS.y / 2}, cam);
-	Vector2 origin2 = calculateScreenPos({simS.x / 2, simS.y / 2}, cam);
 	
-	DrawRectangleV(origin1, Vector2{10, simS.y}, RED);
-	DrawRectangleV(origin1, Vector2{simS.x, 10}, RED);
-	DrawRectangleV(origin2, Vector2{-10, -simS.y}, RED);
-	DrawRectangleV(origin2, Vector2{-simS.x, -10}, RED);
-
+	DrawRectangleLines(origin1.x, origin1.y, simS.x, simS.y, RED);
 
 }

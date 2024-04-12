@@ -9,6 +9,9 @@ using namespace std;
 
 int main()
 {
+	int frame = 0;
+	int substeps = 3;
+
 	InitWindow(800, 800, "sim");
 	SetTargetFPS(60);
 
@@ -17,24 +20,22 @@ int main()
 
 	vector<Particle*> particles;
 
-	particles.push_back(new Particle({0, 0}, {1, 1}, {0, 0}, {0, 0}, 2, 5, RED));
-	particles.push_back(new Particle({100, 100}, {0, 0}, {0, 0}, {0, 0}, 2, 5, GREEN));
-	particles.push_back(new Particle({-100, -100}, {0, 0}, {0, 0}, {0, 0}, 1, 5, BLUE));
-
 	while(!WindowShouldClose())
 	{
 		BeginDrawing();
 		ClearBackground(BLACK);
-
 		drawBounds(simS, Camera);
 
 		for(Particle* p : particles)
 		{
-			for(Particle* o : particles)
+			for(int step = 0; step < substeps; step++)
 			{
-				if(p != o)
+				for(Particle* o : particles)
 				{
-					p->checkCollision(o);
+					if(p != o)
+					{
+						p->checkCollision(o);
+					}
 				}
 			}
 			p->enforceBounds(simS);
@@ -42,6 +43,12 @@ int main()
 			p->draw(Camera);
 		}
 
+		if(frame % 10 == 0)
+		{
+			particles.push_back(new Particle({0, 0}, {1, 1}, {0, 0.1}, 1, 5, RED));
+		}
+		
+		frame++;
 		EndDrawing();
 	}
 

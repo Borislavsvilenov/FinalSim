@@ -2,12 +2,11 @@
 
 using namespace std;
 
-Particle::Particle(Vector2 p, Vector2 v, Vector2 a, Vector2 f, float m, float r, Color c)
+Particle::Particle(Vector2 p, Vector2 v, Vector2 a, float m, float r, Color c)
 {
 	pos = p;
 	vel = v;
 	acc = a;
-	force = f;
 	mass = m;
 	radius = r;
 	color = c;
@@ -20,40 +19,37 @@ Particle::~Particle()
 
 void Particle::update(float dt)
 {
-	acc.x = force.x / mass;
-	acc.y = force.y / mass;
-
 	vel.x += acc.x * dt;
 	vel.y += acc.y * dt;
-	
+
 	pos.x += vel.x * dt;
 	pos.y += vel.y * dt;
 }
 
 void Particle::enforceBounds(Vector2 bounds)
 {
-	if(pos.x > bounds.x/2 - 10)
+	if(pos.x > bounds.x/2 - radius)
 	{
-		vel.x = -abs(vel.x);
-		pos.x = bounds.x/2 - 10;
+		vel.x = -abs(vel.x) * restitution;
+		pos.x = bounds.x/2 - radius;
 	}
 
-	if(pos.x < -bounds.x/2 + 10)
+	if(pos.x < -bounds.x/2 + radius)
 	{
-		vel.x = abs(vel.x);
-		pos.x = -bounds.x/2 + 10;
+		vel.x = abs(vel.x) * restitution;
+		pos.x = -bounds.x/2 + radius;
 	}
 
-	if(pos.y > bounds.y/2 - 10)
+	if(pos.y > bounds.y/2 - radius)
 	{
-		vel.y = -abs(vel.y);
-		pos.y = bounds.y/2 - 10;
+		vel.y = -abs(vel.y) * restitution;
+		pos.y = bounds.y/2 - radius;
 	}
 
-	if(pos.y < -bounds.y/2 + 10)
+	if(pos.y < -bounds.y/2 + radius)
 	{
-		vel.y = abs(vel.y);
-		pos.y = -bounds.y/2 + 10;
+		vel.y = abs(vel.y) * restitution;
+		pos.y = -bounds.y/2 + radius;
 	}
 }
 
@@ -74,7 +70,6 @@ void Particle::checkCollision(Particle* other)
 
 void Particle::performCollision(Particle* other, Vector2 diff, float dist)
 {
-	float restitution = 1.0;
 	float overlap = (radius + other->radius) - dist;
   Vector2 normal = {diff.x / dist, diff.y / dist};
 
