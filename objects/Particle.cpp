@@ -27,6 +27,8 @@ void Particle::update(float dt)
 
 	pos.x += vel.x + acc.x * dt * dt;
 	pos.y += vel.y + acc.y * dt * dt;
+
+	acc = {0, 0};
 }
 
 void Particle::enforceBounds(Vector2 bounds)
@@ -85,6 +87,11 @@ void Particle::performCollision(Particle* other, Vector2 diff, float dist)
 
 	other->pos.x += normal.x * overlap / 2;
 	other->pos.y += normal.y * overlap / 2;
+}
+
+void Particle::applyGravity()
+{
+	acc.y = 0.1;
 }
 
 void Particle::draw(Vector2 cam)

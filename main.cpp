@@ -40,6 +40,7 @@ int main()
 			}
 			p->enforceBounds(simS);
 			p->update(1);
+			p->applyGravity();
 			p->draw(Camera);
 		}
 

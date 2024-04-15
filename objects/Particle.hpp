@@ -24,5 +24,6 @@ public:
 	void enforceBounds(Vector2 bounds);
 	void checkCollision(Particle* other);
 	void performCollision(Particle* other, Vector2 diff, float dist);
+	void applyGravity();
 	void draw(Vector2 cam);
 };
