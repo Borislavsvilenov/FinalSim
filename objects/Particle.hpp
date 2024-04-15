@@ -10,6 +10,7 @@ class Particle
 public:
 	float restitution = 0.5;
 	Vector2 pos;
+	Vector2 posL;
 	Vector2 vel;
 	Vector2 acc;
 	float mass;
