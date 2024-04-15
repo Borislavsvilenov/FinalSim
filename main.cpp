@@ -10,10 +10,10 @@ using namespace std;
 int main()
 {
 	int frame = 0;
-	int substeps = 1;
+	int substeps = 3;
 
 	InitWindow(800, 800, "sim");
-	SetTargetFPS(120);
+	SetTargetFPS(60);
 
 	Vector2 simS = Vector2 {400, 400};
 	Vector2 Camera = Vector2 {0, 0};
@@ -46,7 +46,7 @@ int main()
 
 		if(frame % 10 == 0)
 		{
-			particles.push_back(new Particle({0, 0}, {4, 0}, {0, 0.1}, 3, 5, RED));
+			particles.push_back(new Particle({0, 0}, {4, 0}, {0, 0.1}, 3, 5, WHITE));
 		}
 		
 		frame++;
