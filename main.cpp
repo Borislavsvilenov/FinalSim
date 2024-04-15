@@ -45,7 +45,7 @@ int main()
 
 		if(frame % 10 == 0)
 		{
-			particles.push_back(new Particle({0, 0}, {2, 0}, {0, 0.1}, 3, 5, RED));
+			particles.push_back(new Particle({0, 0}, {4, 0}, {0, 0.1}, 3, 5, RED));
 		}
 		
 		frame++;
