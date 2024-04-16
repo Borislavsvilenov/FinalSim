@@ -12,8 +12,10 @@ int main()
 	int frame = 0;
 	int substeps = 3;
 
+	bool paused = false;
+
 	InitWindow(800, 800, "sim");
-	SetTargetFPS(60);
+	SetTargetFPS(120);
 
 	Vector2 simS = Vector2 {1000, 1000};
 	Vector2 Camera = Vector2 {0, 0};
@@ -30,33 +32,44 @@ int main()
 
 		for(Particle* p : particles)
 		{
-			for(int step = 0; step < substeps; step++)
+			if(!paused)
 			{
-				for(Particle* o : particles)
+				for(int step = 0; step < substeps; step++)
 				{
-					if(p != o)
+					for(Particle* o : particles)
 					{
-						p->checkCollision(o);
+						if(p != o)
+						{
+							p->checkCollision(o);
+						}
 					}
 				}
+				p->enforceBounds(simS);
+				p->update(1);
+				//p->applyGravity();
 			}
-			p->enforceBounds(simS);
-			p->update(1);
-			//p->applyGravity();
 			p->draw(Camera);
 		}
 
-		if(frame % 100 == 0)
+		if(!paused)
 		{
-			particles.push_back(new Particle({0, 900}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true));
-		}
-		
+			if(frame % 10 == 0)
+			{
+				particles.push_back(new Particle({0, 900}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true));
+			}
 		frame++;
+		}
+
 		EndDrawing();
 
 		if(IsKeyDown(KEY_R))
 		{
 			particles.clear();
+		}
+
+		if(IsKeyPressed(KEY_SPACE))
+		{
+			paused = !paused;
 		}
 
 		if(IsKeyDown(KEY_S))
