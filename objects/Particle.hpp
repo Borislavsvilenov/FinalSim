@@ -10,7 +10,7 @@ class Particle
 public:
 	float restitution = 0.5;
 	float G = 0.1;
-	float I = 20;
+	float I = 0.00000001;
 	Vector2 pos;
 	Vector2 posL;
 	Vector2 vel;

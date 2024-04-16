@@ -13,7 +13,7 @@ int main()
 	int substeps = 3;
 
 	bool paused = false;
-	bool spawn = true;
+	bool spawn = false;
 
 	InitWindow(800, 800, "sim");
 	SetTargetFPS(120);
@@ -23,7 +23,7 @@ int main()
 
 	vector<Particle*> particles;
 
-	particles.push_back(new Particle({0, 0}, {0, 0}, {0, 0}, 30, 20, YELLOW, false));
+	particles.push_back(new Particle({0, 0}, {0, 0}, {0, 0}, 3, 20, YELLOW, false));
 
 	while(!WindowShouldClose())
 	{
@@ -54,16 +54,16 @@ int main()
 
 		if(!paused)
 		{
-			if(frame % 10 == 0)
+			if(frame % 100 == 0)
 			{
 				if(spawn)
 				{
-					particles.push_back(new Particle({0, 900}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true));
+					particles.push_back(new Particle({0, 400}, {1, 0}, {0, -0.1}, 0.000001, 5, WHITE, true));
 				}
 			}
+		frame++;
 		}
 
-		frame++;
 
 		EndDrawing();
 
@@ -72,7 +72,7 @@ int main()
 			particles.clear();
 		}
 
-		if(IsKeyPressed(KEY_T))
+		if(IsKeyPressed(KEY_ENTER))
 		{
 			spawn = !spawn;
 		}
