@@ -15,10 +15,12 @@ int main()
 	InitWindow(800, 800, "sim");
 	SetTargetFPS(60);
 
-	Vector2 simS = Vector2 {400, 400};
+	Vector2 simS = Vector2 {1000, 1000};
 	Vector2 Camera = Vector2 {0, 0};
 
 	vector<Particle*> particles;
+
+	particles.push_back(new Particle({0, 0}, {0, 0}, {0, 0}, 30, 20, YELLOW, false));
 
 	while(!WindowShouldClose())
 	{
@@ -40,13 +42,13 @@ int main()
 			}
 			p->enforceBounds(simS);
 			p->update(1);
-			p->applyGravity();
+			//p->applyGravity();
 			p->draw(Camera);
 		}
 
-		if(frame % 10 == 0)
+		if(frame % 100 == 0)
 		{
-			particles.push_back(new Particle({0, 0}, {4, 0}, {0, 0.1}, 3, 5, WHITE));
+			particles.push_back(new Particle({0, 900}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true));
 		}
 		
 		frame++;
