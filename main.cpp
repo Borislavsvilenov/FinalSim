@@ -61,8 +61,9 @@ int main()
 					particles.push_back(new Particle({0, 900}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true));
 				}
 			}
-		frame++;
 		}
+
+		frame++;
 
 		EndDrawing();
 
