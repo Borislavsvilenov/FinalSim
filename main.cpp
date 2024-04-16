@@ -13,6 +13,7 @@ int main()
 	int substeps = 3;
 
 	bool paused = false;
+	bool spawn = true;
 
 	InitWindow(800, 800, "sim");
 	SetTargetFPS(120);
@@ -55,7 +56,10 @@ int main()
 		{
 			if(frame % 10 == 0)
 			{
-				particles.push_back(new Particle({0, 900}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true));
+				if(spawn)
+				{
+					particles.push_back(new Particle({0, 900}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true));
+				}
 			}
 		frame++;
 		}
@@ -65,6 +69,11 @@ int main()
 		if(IsKeyDown(KEY_R))
 		{
 			particles.clear();
+		}
+
+		if(IsKeyPressed(KEY_T))
+		{
+			spawn = !spawn;
 		}
 
 		if(IsKeyPressed(KEY_SPACE))
