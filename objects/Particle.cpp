@@ -117,12 +117,6 @@ void Particle::atraction(Particle* other, Vector2 diff, float dist)
 
 	other->acc.x -= G * mass * normal.x / dist;
 	other->acc.y -= G * mass * normal.y / dist;
-
-	acc.x += I * normal.x * other->mass / dist * dist * dist * dist;
-	acc.y += I * normal.y * other->mass / dist * dist * dist * dist;
-	
-	other->acc.x -= I * normal.x * mass / dist * dist * dist * dist;
-	other->acc.y -= I * normal.y * mass / dist * dist * dist * dist;
 }
 
 void Particle::applyGravity()
