@@ -23,17 +23,13 @@ QuadTree::~QuadTree()
 
 void QuadTree::subdivide()
 {
-	if(!divided)
+	if(!divided && particles.size() > maxParticles)
 	{
-		if(particles.size() > maxParticles)
-		{
-			topLeft = new QuadTree(pos, {bounds.x / 2, bounds.y / 2}, maxParticles);
-			topRight = new QuadTree({pos.x + bounds.x / 2, pos.y}, {bounds.x / 2, bounds.y / 2}, maxParticles);
-			bottomLeft = new QuadTree({pos.x, pos.y + bounds.y / 2}, {bounds.x / 2, bounds.y / 2}, maxParticles);
-			bottomRight = new QuadTree({pos.x + bounds.x / 2, pos.y + bounds.y / 2}, {bounds.x / 2, bounds.y / 2}, maxParticles);
-			divided = true;
-			cout << "subdivided" << endl;
-		}
+		topLeft = new QuadTree(pos, {bounds.x / 2, bounds.y / 2}, maxParticles);
+		topRight = new QuadTree({pos.x + bounds.x / 2, pos.y}, {bounds.x / 2, bounds.y / 2}, maxParticles);
+		bottomLeft = new QuadTree({pos.x, pos.y + bounds.y / 2}, {bounds.x / 2, bounds.y / 2}, maxParticles);
+		bottomRight = new QuadTree({pos.x + bounds.x / 2, pos.y + bounds.y / 2}, {bounds.x / 2, bounds.y / 2}, maxParticles);
+		divided = true;
 	}
 }
 
