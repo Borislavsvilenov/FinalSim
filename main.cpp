@@ -59,6 +59,12 @@ int main()
 			p->draw(Camera);
 		}
 
+		QT->clear();
+		for(Particle* p : particles)
+		{
+			QT->insert(p);
+		}
+
 		if(!paused)
 		{
 			if(frame % 10 == 0)
