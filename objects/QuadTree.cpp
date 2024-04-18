@@ -101,6 +101,6 @@ void QuadTree::draw()
 	}
 	else
 	{
-		drawRectangleLines(pos.x, pos.y, bounds.x, bounds.y, GREEN);
+		DrawRectangleLines(pos.x, pos.y, bounds.x, bounds.y, GREEN);
 	}
 }
