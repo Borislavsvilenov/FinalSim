@@ -24,9 +24,12 @@ int main()
 
 	vector<Particle*> particles;
 
-	QuadTree* QT = new QuadTree(simS, simS, 1000);
+	QuadTree* QT = new QuadTree({-simS.x / 2, -simS.y / 2}, simS, 1);
 
 	particles.push_back(new Particle({0, 0}, {0, 0}, {0, 0}, 3, 20, YELLOW, false));
+
+	QT->insert(new Particle({1, 1}, {0, 0}, {0, 0}, 3, 20, YELLOW, false));
+	QT->insert(new Particle({-1, -1}, {0, 0}, {0, 0}, 3, 20, YELLOW, false));
 
 	while(!WindowShouldClose())
 	{

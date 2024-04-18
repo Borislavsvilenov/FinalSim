@@ -44,7 +44,22 @@ void QuadTree::insert(Particle* particle)
 			subdivide();
 			for(Particle* p : particles)
 			{
-				insert(p);
+				if(isInBounds(particle->pos, topLeft->bounds))
+				{
+					topLeft->insert(p);
+				}
+				if(isInBounds(particle->pos, topRight->bounds))
+				{
+					topRight->insert(p);
+				}
+				if(isInBounds(particle->pos, bottomLeft->bounds))
+				{
+					bottomLeft->insert(p);
+				}
+				if(isInBounds(particle->pos, bottomRight->bounds))
+				{
+					bottomRight->insert(p);
+				}
 			}
 			particles.clear();
 		}
