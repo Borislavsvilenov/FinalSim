@@ -27,5 +27,5 @@ class QuadTree
 		void subdivide();
 		void insert(Particle* particle);
 		void clear();
-		void draw();
+		void draw(Vector2 cam);
 };

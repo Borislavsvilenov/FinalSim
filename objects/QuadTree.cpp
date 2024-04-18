@@ -90,17 +90,18 @@ void QuadTree::clear()
 	}
 }
 
-void QuadTree::draw()
+void QuadTree::draw(Vector2 cam)
 {
 	if(divided)
 	{
-		topLeft->draw();
-		topRight->draw();
-		bottomLeft->draw();
-		bottomRight->draw();
+		topLeft->draw(cam);
+		topRight->draw(cam);
+		bottomLeft->draw(cam);
+		bottomRight->draw(cam);
 	}
 	else
 	{
-		DrawRectangleLines(pos.x, pos.y, bounds.x, bounds.y, GREEN);
+		Vector2 origin1 = calculateScreenPos(pos, cam);
+		DrawRectangleLines(origin1.x, origin1.y, bounds.x, bounds.y, GREEN);
 	}
 }
