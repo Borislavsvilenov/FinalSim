@@ -89,3 +89,18 @@ void QuadTree::clear()
 		particles.clear();
 	}
 }
+
+void QuadTree::draw()
+{
+	if(divided)
+	{
+		topLeft->draw();
+		topRight->draw();
+		bottomLeft->draw();
+		bottomRight->draw();
+	}
+	else
+	{
+		drawRectangleLines(pos.x, pos.y, bounds.x, bounds.y, GREEN);
+	}
+}

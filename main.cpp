@@ -24,6 +24,8 @@ int main()
 
 	vector<Particle*> particles;
 
+	QuadTree* tree = new QuadTree({0, 0}, simS, 1000);
+
 	particles.push_back(new Particle({0, 0}, {0, 0}, {0, 0}, 3, 20, YELLOW, false));
 
 	while(!WindowShouldClose())
@@ -31,6 +33,8 @@ int main()
 		BeginDrawing();
 		ClearBackground(BLACK);
 		drawBounds(simS, Camera);
+
+		QuadTree::draw();
 
 		for(Particle* p : particles)
 		{
