@@ -17,12 +17,12 @@ void drawBounds(Vector2 simS, Vector2 cam)
 	DrawRectangleLines(origin1.x, origin1.y, simS.x, simS.y, RED);
 }
 
-bool isInBounds(Vector2 pos, Vector2 bounds)
+bool isInBounds(Vector2 pos, Vector2 bPos, Vector2 bounds)
 {
-	return (pos.x > bounds.x / 2 && pos.x < -bounds.x / 2 && pos.y > bounds.y / 2 && pos.y < -bounds.y / 2);
+	return (pos.x >= bPos.x && pos.x <= bPos.x + bounds.x && pos.y >= bPos.y && pos.y <= bPos.y + bounds.y);
 }
 
 bool intersects(Vector2 posA, Vector2 sizeA, Vector2 posB, Vector2 sizeB)
 {
-	return (posA.x < posB.x + sizeB.x && posA.x + sizeA.x > posB.x && posA.y < posB.y + sizeB.y && posA.y + sizeA.y > posB.y);
+	return (posA.x <= posB.x + sizeB.x && posA.x + sizeA.x >= posB.x && posA.y <= posB.y + sizeB.y && posA.y + sizeA.y >= posB.y);
 }

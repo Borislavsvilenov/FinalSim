@@ -22,21 +22,21 @@ int main()
 	Vector2 simS = Vector2 {2000, 2000};
 	Vector2 Camera = Vector2 {0, 0};
 
+	vector<Particle*> particles = {};
+	
 	QuadTree* QT = new QuadTree({-simS.x / 2, -simS.y / 2}, simS, 4);
 
-	vector<Particle*> particles = {};
-
-	QT->insert(new Particle({0, 0}, {0, 0}, {0, 0}, 3, 20, YELLOW, false));
+	QT->insert(new Particle({1, 1}, {0, 0}, {0, 0}, 3, 20, YELLOW, false));
 	
 	while(!WindowShouldClose())
 	{
 		BeginDrawing();
 		ClearBackground(BLACK);
 		drawBounds(simS, Camera);
-
 		QT->draw(Camera);
-
-    particles = QT->search({-simS.x / 2, -simS.y / 2}, simS, {});
+		
+		particles.clear();
+    particles = QT->search({-simS.x / 2, -simS.y / 2}, simS, particles);
 
 		for(Particle* p : particles)
 		{
@@ -65,7 +65,7 @@ int main()
 			{
 				if(spawn)
 				{
-					QT->insert(new Particle({0, 400}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true));
+					QT->insert(new Particle({1, 401}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true));
 				}
 			}
 		frame++;

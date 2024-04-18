@@ -26,7 +26,7 @@ class QuadTree
 
 		void subdivide();
 		void insert(Particle* particle);
-		vector<Particle*> search(Vector2 pos, Vector2 bounds, vector<Particle*> results);
+		std::vector<Particle*> search(Vector2 pos, Vector2 bounds, std::vector<Particle*> results);
 		void clear();
 		void draw(Vector2 cam);
 };

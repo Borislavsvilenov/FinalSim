@@ -1,5 +1,7 @@
 #include "QuadTree.hpp"
 
+using namespace std;
+
 QuadTree::QuadTree(Vector2 pos, Vector2 bounds, int maxParticles)
 {
 	this->pos = pos;
@@ -44,19 +46,19 @@ void QuadTree::insert(Particle* particle)
 			subdivide();
 			for(Particle* p : particles)
 			{
-				if(isInBounds(particle->pos, topLeft->bounds))
+				if(isInBounds(particle->pos, topLeft->pos, topLeft->bounds))
 				{
 					topLeft->insert(p);
 				}
-				if(isInBounds(particle->pos, topRight->bounds))
+				if(isInBounds(particle->pos, topRight->pos, topRight->bounds))
 				{
 					topRight->insert(p);
 				}
-				if(isInBounds(particle->pos, bottomLeft->bounds))
+				if(isInBounds(particle->pos, bottomLeft->pos, bottomLeft->bounds))
 				{
 					bottomLeft->insert(p);
 				}
-				if(isInBounds(particle->pos, bottomRight->bounds))
+				if(isInBounds(particle->pos, bottomRight->pos, bottomRight->bounds))
 				{
 					bottomRight->insert(p);
 				}
@@ -66,19 +68,19 @@ void QuadTree::insert(Particle* particle)
 	}	
 	else
 	{
-		if(isInBounds(particle->pos, topLeft->bounds))
+		if(isInBounds(particle->pos, topLeft->pos, topLeft->bounds))
 		{
 			topLeft->insert(particle);
 		}
-		if(isInBounds(particle->pos, topRight->bounds))
+		if(isInBounds(particle->pos, topRight->pos, topRight->bounds))
 		{
 			topRight->insert(particle);
 		}
-		if(isInBounds(particle->pos, bottomLeft->bounds))
+		if(isInBounds(particle->pos, bottomLeft->pos, bottomLeft->bounds))
 		{
 			bottomLeft->insert(particle);
 		}
-		if(isInBounds(particle->pos, bottomRight->bounds))
+		if(isInBounds(particle->pos, bottomRight->pos, bottomRight->bounds))
 		{
 			bottomRight->insert(particle);
 		}
@@ -96,7 +98,7 @@ vector<Particle*> QuadTree::search(Vector2 pos, Vector2 bounds, vector<Particle*
 	{
 		for(Particle* p : particles)
 		{
-			if(isInBounds(p->pos, bounds))
+			if(isInBounds(p->pos, pos, bounds))
 			{
 				results.push_back(p);
 			}
@@ -109,7 +111,7 @@ vector<Particle*> QuadTree::search(Vector2 pos, Vector2 bounds, vector<Particle*
 		results = bottomLeft->search(pos, bounds, results);
 		results = bottomRight->search(pos, bounds, results);
 	}
-
+	
 	return results;
 }
 
