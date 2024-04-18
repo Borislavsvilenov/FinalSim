@@ -25,7 +25,7 @@ void QuadTree::subdivide()
 	{
 		if(particles.size() > maxParticles)
 		{
-			topLeft = new QuadTree({pos.x - bounds.x / 4, pos.y - bounds.y / 4}, {bounds.x / 2, bounds.y / 2}, maxParticles);
+			topLeft = new QuadTree({pos.x - bounds.x / 2, pos.y - bounds.y / 2}, {bounds.x / 2, bounds.y / 2}, maxParticles);
 			topRight = new QuadTree({pos.x + bounds.x / 4, pos.y - bounds.y / 4}, {bounds.x / 2, bounds.y / 2}, maxParticles);
 			bottomLeft = new QuadTree({pos.x - bounds.x / 4, pos.y + bounds.y / 4}, {bounds.x / 2, bounds.y / 2}, maxParticles);
 			bottomRight = new QuadTree({pos.x + bounds.x / 4, pos.y + bounds.y / 4}, {bounds.x / 2, bounds.y / 2}, maxParticles);
