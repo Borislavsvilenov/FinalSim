@@ -4,6 +4,7 @@
 
 #include "screenAssist.hpp"
 #include "objects/Particle.hpp"
+#include "objects/QuadTree.hpp"
 
 using namespace std;
 

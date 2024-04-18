@@ -12,7 +12,9 @@ add_executable(Sim main.cpp
 	             screenAssist.hpp
 	             screenAssist.cpp
                objects/Particle.hpp
-               objects/Particle.cpp)
+               objects/Particle.cpp
+							 objects/QuadTree.hpp
+							 objects/QuadTree.cpp)
 
 target_link_libraries(Sim PRIVATE raylib)
 target_compile_features(Sim PRIVATE cxx_std_11)
