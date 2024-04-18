@@ -85,6 +85,34 @@ void QuadTree::insert(Particle* particle)
 	}
 }
 
+vector<Particle*> QuadTree::search(Vector2 pos, Vector2 bounds, vector<Particle*> results)
+{
+	if(!intersects(pos, bounds, this->pos, this->bounds))
+	{
+		return results;
+	}
+
+	if(!divided)
+	{
+		for(Particle* p : particles)
+		{
+			if(isInBounds(p->pos, bounds))
+			{
+				results.push_back(p);
+			}
+		}
+	}
+	else
+	{
+		results = topLeft->search(pos, bounds, results);
+		results = topRight->search(pos, bounds, results);
+		results = bottomLeft->search(pos, bounds, results);
+		results = bottomRight->search(pos, bounds, results);
+	}
+
+	return results;
+}
+
 void QuadTree::clear()
 {
 	if(divided)
