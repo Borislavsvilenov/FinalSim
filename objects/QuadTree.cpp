@@ -32,6 +32,7 @@ void QuadTree::subdivide()
 			bottomLeft = new QuadTree({pos.x, pos.y + bounds.y / 2}, {bounds.x / 2, bounds.y / 2}, maxParticles);
 			bottomRight = new QuadTree({pos.x + bounds.x / 2, pos.y + bounds.y / 2}, {bounds.x / 2, bounds.y / 2}, maxParticles);
 			divided = true;
+			cout << "subdivided" << endl;
 		}
 	}
 }
