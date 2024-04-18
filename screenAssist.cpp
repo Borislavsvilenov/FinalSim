@@ -19,5 +19,5 @@ void drawBounds(Vector2 simS, Vector2 cam)
 
 bool isInBounds(Vector2 pos, Vector2 bounds)
 {
-	return (pos.x > -bounds.x / 2 && pos.x < bounds.x / 2 && pos.y > -bounds.y / 2 && pos.y < bounds.y / 2);
+	return (pos.x > bounds.x / 2 && pos.x < -bounds.x / 2 && pos.y > bounds.y / 2 && pos.y < -bounds.y / 2);
 }

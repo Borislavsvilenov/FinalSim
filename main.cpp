@@ -19,23 +19,23 @@ int main()
 	InitWindow(1000, 1000, "sim");
 	SetTargetFPS(120);
 
-	Vector2 simS = Vector2 {1000, 1000};
+	Vector2 simS = Vector2 {2000, 2000};
 	Vector2 Camera = Vector2 {0, 0};
 
 	vector<Particle*> particles;
 
-	QuadTree* QT = new QuadTree({-simS.x / 2, -simS.y / 2}, simS, 1);
+	QuadTree* QT = new QuadTree({-simS.x / 2, -simS.y / 2}, simS, 4);
 
-	//particles.push_back(new Particle({0, 0}, {0, 0}, {0, 0}, 3, 20, YELLOW, false));
+	particles.push_back(new Particle({0, 0}, {0, 0}, {0, 0}, 3, 20, YELLOW, false));
 
 	QT->insert(new Particle({1, 1}, {0, 0}, {0, 0}, 3, 20, YELLOW, false));
 	QT->insert(new Particle({-1, -1}, {0, 0}, {0, 0}, 3, 20, YELLOW, false));
-
+	
 	while(!WindowShouldClose())
 	{
 		BeginDrawing();
 		ClearBackground(BLACK);
-		//drawBounds(simS, Camera);
+		drawBounds(simS, Camera);
 
 		QT->draw(Camera);
 
