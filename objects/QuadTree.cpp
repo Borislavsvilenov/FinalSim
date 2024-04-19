@@ -47,15 +47,15 @@ void QuadTree::insert(Particle* particle)
 				{
 					topLeft->insert(p);
 				}
-				if(isInBounds(particle->pos, topRight->pos, topRight->bounds))
+				else if(isInBounds(particle->pos, topRight->pos, topRight->bounds))
 				{
 					topRight->insert(p);
 				}
-				if(isInBounds(particle->pos, bottomLeft->pos, bottomLeft->bounds))
+				else if(isInBounds(particle->pos, bottomLeft->pos, bottomLeft->bounds))
 				{
 					bottomLeft->insert(p);
 				}
-				if(isInBounds(particle->pos, bottomRight->pos, bottomRight->bounds))
+				else if(isInBounds(particle->pos, bottomRight->pos, bottomRight->bounds))
 				{
 					bottomRight->insert(p);
 				}
@@ -69,15 +69,15 @@ void QuadTree::insert(Particle* particle)
 		{
 			topLeft->insert(particle);
 		}
-		if(isInBounds(particle->pos, topRight->pos, topRight->bounds))
+		else if(isInBounds(particle->pos, topRight->pos, topRight->bounds))
 		{
 			topRight->insert(particle);
 		}
-		if(isInBounds(particle->pos, bottomLeft->pos, bottomLeft->bounds))
+		else if(isInBounds(particle->pos, bottomLeft->pos, bottomLeft->bounds))
 		{
 			bottomLeft->insert(particle);
 		}
-		if(isInBounds(particle->pos, bottomRight->pos, bottomRight->bounds))
+		else if(isInBounds(particle->pos, bottomRight->pos, bottomRight->bounds))
 		{
 			bottomRight->insert(particle);
 		}
@@ -117,12 +117,12 @@ void QuadTree::clear()
 	if(divided)
 	{
 		topLeft->clear();
-		topRight->clear();
-		bottomLeft->clear();
-		bottomRight->clear();
 		delete topLeft;
+		topRight->clear();
 		delete topRight;
+		bottomLeft->clear();
 		delete bottomLeft;
+		bottomRight->clear();
 		delete bottomRight;
 		divided = false;
 	}
