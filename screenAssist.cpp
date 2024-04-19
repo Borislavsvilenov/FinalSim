@@ -19,7 +19,7 @@ void drawBounds(Vector2 simS, Vector2 cam)
 
 bool isInBounds(Vector2 pos, Vector2 bPos, Vector2 bounds)
 {
-	return (pos.x >= bPos.x && pos.x <= bPos.x + bounds.x && pos.y >= bPos.y && pos.y <= bPos.y + bounds.y);
+	return (pos.x >= bPos.x && pos.x < bPos.x + bounds.x && pos.y >= bPos.y && pos.y < bPos.y + bounds.y);
 }
 
 bool intersects(Vector2 posA, Vector2 sizeA, Vector2 posB, Vector2 sizeB)

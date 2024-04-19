@@ -26,7 +26,7 @@ int main()
 	
 	QuadTree* QT = new QuadTree({-simS.x / 2, -simS.y / 2}, simS, 4);
 
-	QT->insert(new Particle({1, 1}, {0, 0}, {0, 0}, 3, 20, YELLOW, false));
+	QT->insert(new Particle({0, 0}, {0, 0}, {0, 0}, 3, 20, YELLOW, false));
 	
 	while(!WindowShouldClose())
 	{
@@ -35,7 +35,6 @@ int main()
 		drawBounds(simS, Camera);
 		QT->draw(Camera);
 		
-		particles.clear();
     particles = QT->search({-simS.x / 2, -simS.y / 2}, simS, particles);
 
 		for(Particle* p : particles)
@@ -65,13 +64,15 @@ int main()
 			QT->insert(p);
 		}
 
+		particles.clear();
+
 		if(!paused)
 		{
 			if(frame % 10 == 0)
 			{
 				if(spawn)
 				{
-					QT->insert(new Particle({1, 401}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true));
+					QT->insert(new Particle({0, 400}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true));
 				}
 			}
 		frame++;
