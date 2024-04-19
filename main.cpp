@@ -83,7 +83,7 @@ int main()
 
 		if(IsKeyDown(KEY_R))
 		{
-			particles.clear();
+			QT->clear();
 		}
 
 		if(IsKeyPressed(KEY_ENTER))
