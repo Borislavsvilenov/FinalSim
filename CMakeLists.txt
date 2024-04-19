@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.27)
+cmake_minimum_required(VERSION 3.29)
 project(Sim VERSION 0.1.0 LANGUAGES C CXX)
 
 find_package(raylib REQUIRED)
