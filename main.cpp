@@ -16,8 +16,8 @@ int main()
 	bool paused = false;
 	bool spawn = false;
 
-	InitWindow(1000, 1000, "sim");
-	SetTargetFPS(120);
+	InitWindow(900, 900, "sim");
+	SetTargetFPS(60);
 
 	Vector2 simS = Vector2 {2000, 2000};
 	Vector2 Camera = Vector2 {0, 0};
@@ -35,7 +35,7 @@ int main()
 		drawBounds(simS, Camera);
 		QT->draw(Camera);
 		
-    particles = QT->search({-simS.x / 2, -simS.y / 2}, simS, particles);
+    particles = QT->search({-simS.x / 2, -simS.y / 2}, simS, {});
 
 		for(Particle* p : particles)
 		{
@@ -64,7 +64,6 @@ int main()
 			QT->insert(p);
 		}
 
-		particles.clear();
 
 		if(!paused)
 		{
@@ -72,7 +71,7 @@ int main()
 			{
 				if(spawn)
 				{
-					QT->insert(new Particle({0, 400}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true));
+					QT->insert(new Particle({0, 400}, {1, 0}, {0, -0.1}, 0.01, 2, WHITE, true));
 				}
 			}
 		frame++;
