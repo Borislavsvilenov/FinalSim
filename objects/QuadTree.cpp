@@ -46,7 +46,7 @@ void QuadTree::insert(Particle* particle)
 				if(isInBounds(particle->pos, topLeft->pos, topLeft->bounds))
 				{
 					topLeft->insert(p);
-				}
+        }
 				else if(isInBounds(particle->pos, topRight->pos, topRight->bounds))
 				{
 					topRight->insert(p);
