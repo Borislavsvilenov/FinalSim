@@ -19,8 +19,8 @@ int main()
 	InitWindow(900, 900, "sim");
 	SetTargetFPS(60);
 
-	Vector2 simS = Vector2 {2000, 2000};
-	Vector2 Camera = Vector2 {0, 0};
+	Vector2 simS = {2000, 2000};
+	Vector2 Camera = {0, 0};
 
 	vector<Particle*> particles = {};
 	
