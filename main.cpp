@@ -71,7 +71,7 @@ int main()
 			{
 				if(spawn)
 				{
-					QT->insert(new Particle({0, 400}, {1, 0}, {0, -0.1}, 0.01, 2, WHITE, true));
+					QT->insert(new Particle({0, 400}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true));
 				}
 			}
 		frame++;
