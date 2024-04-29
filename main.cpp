@@ -42,6 +42,7 @@ int main()
 			{
 				for(int step = 0; step < substeps; step++)
 				{
+          // vector<Particle*> others = QT->search({p->pos.x - 25, p->pos.y - 25}, {50, 50}, {});
 					for(Particle* o : particles)
 					{
 						if(p != o)
