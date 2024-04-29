@@ -17,7 +17,7 @@ int main()
 	bool spawn = false;
 
 	InitWindow(900, 900, "sim");
-	SetTargetFPS(60);
+	SetTargetFPS(120);
 
 	Vector2 simS = {2000, 2000};
 	Vector2 Camera = {0, 0};
@@ -33,7 +33,6 @@ int main()
 		BeginDrawing();
 		ClearBackground(BLACK);
 		drawBounds(simS, Camera);
-		QT->draw(Camera);
 		
     particles = QT->search({-simS.x / 2, -simS.y / 2}, simS, {});
 
