@@ -33,6 +33,7 @@ int main()
 		BeginDrawing();
 		ClearBackground(BLACK);
 		drawBounds(simS, Camera);
+    QT->draw(Camera);
 		
     particles = QT->search({-simS.x / 2, -simS.y / 2}, simS, {});
 
@@ -42,7 +43,7 @@ int main()
 			{
 				for(int step = 0; step < substeps; step++)
 				{
-          // vector<Particle*> others = QT->search({p->pos.x - 25, p->pos.y - 25}, {50, 50}, {});
+          //vector<Particle*> others = QT->search({p->pos.x - 10, p->pos.y - 10}, {20, 20}, {});
 					for(Particle* o : particles)
 					{
 						if(p != o)
@@ -76,7 +77,9 @@ int main()
 			}
 		frame++;
 		}
-
+    
+    DrawFPS(0,0);
+    DrawText(TextFormat("Particles: %i", particles.size()), 0, 20, 20, WHITE);
 
 		EndDrawing();
 
