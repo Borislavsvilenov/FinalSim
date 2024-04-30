@@ -17,7 +17,7 @@ int main()
 	bool spawn = false;
 
 	InitWindow(900, 900, "sim");
-	SetTargetFPS(120);
+	SetTargetFPS(60);
 
 	Vector2 simS = {2000, 2000};
 	Vector2 Camera = {0, 0};
