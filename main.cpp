@@ -25,7 +25,7 @@ int main()
 	InitWindow(900, 900, "sim");
 	SetTargetFPS(60);
 
-	Vector2 simS = {1000, 1000};
+	Vector2 simS = {2000, 2000};
 	Vector2 Camera = {0, 0};
 
 	vector<Particle*> particles = {};
@@ -49,7 +49,7 @@ int main()
 				for(int step = 0; step < substeps; step++)
 				{
           //vector<Particle*> others = QT->search({p->pos.x - 10, p->pos.y - 10}, {20, 20}, {});
-					for(Particle* o : others)
+					for(Particle* o : particles)
 					{
 						if(p != o)
 						{
