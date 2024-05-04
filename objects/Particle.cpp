@@ -78,7 +78,7 @@ void Particle::checkCollision(Particle* other)
 		performCollision(other, diff, dist);
 	}
 
-	atraction(other, diff, dist);
+	//atraction(other, diff, dist);
 }
 
 void Particle::performCollision(Particle* other, Vector2 diff, float dist)

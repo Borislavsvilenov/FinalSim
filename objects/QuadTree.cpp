@@ -35,9 +35,9 @@ void QuadTree::subdivide()
 
 void QuadTree::insert(Particle* particle)
 {
+	particles.push_back(particle);
 	if(!divided)
 	{
-		particles.push_back(particle);
 		if(particles.size() > maxParticles)
 		{
 			subdivide();
@@ -82,6 +82,37 @@ void QuadTree::insert(Particle* particle)
 			bottomRight->insert(particle);
 		}
 	}
+}
+
+void QuadTree::remove(Particle* particle)
+{
+  particles.remove(particle);
+  if(divided)
+  {
+    topLeft->remove(particle);
+    topRight->remove(particle);
+    bottomLeft->remove(particle);
+    bottomRight->remove(particle);
+  }
+}
+
+void QuadTree::checkOutOfBounds(std::vector<Particle*> *OutOfBounds)
+{
+  for(Particle* p : particles)
+  {
+    if(!isInBounds(p->pos, pos, bounds))
+    {
+      OutOfBounds->push_back(p);
+    }
+  }
+
+  if(divided)
+  {
+    topLeft->checkOutOfBounds(OutOfBounds);
+    topRight->checkOutOfBounds(OutOfBounds);
+    bottomLeft->checkOutOfBounds(OutOfBounds);
+    bottomRight->checkOutOfBounds(OutOfBounds);
+  }
 }
 
 vector<Particle*> QuadTree::search(Vector2 pos, Vector2 bounds, vector<Particle*> results)

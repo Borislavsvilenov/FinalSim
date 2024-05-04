@@ -20,6 +20,7 @@ public:
 	Color color;
 
 	bool movable;
+  bool inBounds;
 
 	Particle(Vector2 p, Vector2 v, Vector2 a, float m, float r, Color c, bool mv);
 	~Particle();

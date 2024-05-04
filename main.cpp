@@ -8,6 +8,12 @@
 
 using namespace std;
 
+void insert(Particle* p, QuadTree* QT, vector<Particle*> *particles)
+{
+  QT->insert(p);
+  particles->push_back(p);
+}
+
 int main()
 {
 	int frame = 0;
@@ -19,14 +25,15 @@ int main()
 	InitWindow(900, 900, "sim");
 	SetTargetFPS(60);
 
-	Vector2 simS = {2000, 2000};
+	Vector2 simS = {1000, 1000};
 	Vector2 Camera = {0, 0};
 
 	vector<Particle*> particles = {};
+  vector<Particle*> OutOfBounds = {};
 	
-	QuadTree* QT = new QuadTree({-simS.x / 2, -simS.y / 2}, simS, 4);
+	QuadTree* QT = new QuadTree({-simS.x / 2, -simS.y / 2}, simS, 10);
 
-	QT->insert(new Particle({0, 0}, {0, 0}, {0, 0}, 3, 20, YELLOW, false));
+  insert(new Particle({0, 0}, {0, 0}, {0, 0}, 3, 20, YELLOW, false), QT, &particles);
 	
 	while(!WindowShouldClose())
 	{
@@ -35,16 +42,14 @@ int main()
 		drawBounds(simS, Camera);
     QT->draw(Camera);
 		
-    particles = QT->search({-simS.x / 2, -simS.y / 2}, simS, {});
-
 		for(Particle* p : particles)
 		{
 			if(!paused)
 			{
 				for(int step = 0; step < substeps; step++)
 				{
-          //vector<Particle*> others = QT->search({p->pos.x - 10, p->pos.y - 10}, {20, 20}, {});
-					for(Particle* o : particles)
+          vector<Particle*> others = QT->search({p->pos.x - 10, p->pos.y - 10}, {20, 20}, {});
+					for(Particle* o : others)
 					{
 						if(p != o)
 						{
@@ -53,18 +58,11 @@ int main()
 					}
 				}
 				p->enforceBounds(simS);
-				p->update(1);
-				//p->applyGravity();
+				p->update(2);
+				p->applyGravity();
 			}
 			p->draw(Camera);
 		}
-
-		QT->clear();
-		for(Particle* p : particles)
-		{
-			QT->insert(p);
-		}
-
 
 		if(!paused)
 		{
@@ -72,10 +70,18 @@ int main()
 			{
 				if(spawn)
 				{
-					QT->insert(new Particle({0, 400}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true));
+          insert(new Particle({0, 400}, {1, 0}, {0, -0.1}, 0.01, 5, WHITE, true), QT, &particles);
 				}
 			}
-		frame++;
+		  frame++;
+
+      QT->checkOutOfBounds(&OutOfBounds);
+      for(Particle* p : OutOfBounds)
+      {
+        QT->remove(p);
+        QT->insert(p);
+      }
+      OutOfBounds.clear();
 		}
     
     DrawFPS(0,0);
