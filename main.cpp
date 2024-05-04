@@ -48,7 +48,7 @@ int main()
 			{
 				for(int step = 0; step < substeps; step++)
 				{
-          vector<Particle*> others = QT->search({p->pos.x - 10, p->pos.y - 10}, {20, 20}, {});
+          //vector<Particle*> others = QT->search({p->pos.x - 10, p->pos.y - 10}, {20, 20}, {});
 					for(Particle* o : others)
 					{
 						if(p != o)
@@ -59,7 +59,7 @@ int main()
 				}
 				p->enforceBounds(simS);
 				p->update(2);
-				p->applyGravity();
+				//p->applyGravity();
 			}
 			p->draw(Camera);
 		}
