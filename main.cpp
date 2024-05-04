@@ -31,7 +31,7 @@ int main()
 	vector<Particle*> particles = {};
   vector<Particle*> OutOfBounds = {};
 	
-	QuadTree* QT = new QuadTree({-simS.x / 2, -simS.y / 2}, simS, 10);
+	QuadTree* QT = new QuadTree({-simS.x / 2, -simS.y / 2}, simS, 4);
 
   insert(new Particle({0, 0}, {0, 0}, {0, 0}, 3, 20, YELLOW, false), QT, &particles);
 	
@@ -58,7 +58,7 @@ int main()
 					}
 				}
 				p->enforceBounds(simS);
-				p->update(2);
+				p->update(1);
 				//p->applyGravity();
 			}
 			p->draw(Camera);
