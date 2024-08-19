@@ -8,7 +8,13 @@ include_directories(Sim PRIVATE objects)
 include(CTest)
 enable_testing()
 
-add_executable(Sim main.cpp)
+add_executable(Sim main.cpp
+  objects/Looper.cpp
+  objects/Looper.hpp
+  objects/Particle.cpp
+  objects/Particle.hpp
+  objects/Vec2.cpp
+  objects/Vec2.hpp)
 
 target_link_libraries(Sim PRIVATE raylib)
 target_compile_features(Sim PRIVATE cxx_std_11)

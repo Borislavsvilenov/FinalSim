@@ -1,0 +1,3 @@
+-I/opt/homebrew/include/
+-lraylib
+-L/opt/homebrew/lib/
