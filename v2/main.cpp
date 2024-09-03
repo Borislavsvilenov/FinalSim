@@ -7,7 +7,7 @@ int main()
 
   Looper* sim = new Looper();
 
-  sim->addParticle(Particle(400, 400, 2, 0, 20, RED));
+  sim->addParticle(Particle(400, 400, 2, 0, 20, WHITE));
 
   while (!WindowShouldClose())
   {
