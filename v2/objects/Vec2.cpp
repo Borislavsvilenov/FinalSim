@@ -9,26 +9,36 @@ Vec2::Vec2(float x, float y)
 
 Vec2::~Vec2()
 {
+
 }
 
-Vec2 Vec2::add(Vec2 other)
+void Vec2::copy(Vec2* other)
 {
-  return Vec2{this->x + other.x, this->y + other.y};
+  this->x = other->x;
+  this->y = other->y;
 }
 
-Vec2 Vec2::sub(Vec2 other)
-{
-  return Vec2{this->x - other.x, this->y - other.y};
+void Vec2::add(Vec2* other)
+{ 
+  this->x += other->x;
+  this->y += other->y;
 }
 
-Vec2 Vec2::scale(float s)
+void Vec2::sub(Vec2* other)
 {
-  return Vec2{this->x * s, this->y * s};
+  this->x -= other->x;
+  this->y -= other->y;
 }
 
-float Vec2::dot(Vec2 other)
+void Vec2::scale(float s)
 {
-  return this->x * other.x + this->y * other.y;
+  this->x *= s;
+  this->y *= s;
+}
+
+float Vec2::dot(Vec2* other)
+{
+  return this->x * other->x + this->y * other->y;
 }
 
 float Vec2::mag()
@@ -36,8 +46,10 @@ float Vec2::mag()
   return sqrt(this->x * this->x + this->y * this->y);
 }
 
-Vec2 Vec2::normalize()
+void Vec2::normalize()
 {
   float mag = this->mag();
-  return Vec2{this->x / mag, this->y / mag};
+
+  this->x /= mag;
+  this->y /= mag;
 }

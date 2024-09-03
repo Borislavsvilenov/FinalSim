@@ -10,13 +10,15 @@ public:
   Vec2(float x, float y);
   ~Vec2();
   
-  Vec2 add(Vec2 other);
-  Vec2 sub(Vec2 other);
+  void copy(Vec2* other);
 
-  Vec2 scale(float s);
+  void add(Vec2* other);
+  void sub(Vec2* other);
 
-  float dot(Vec2 other);
+  void scale(float s);
+
+  float dot(Vec2* other);
   float mag();
 
-  Vec2 normalize();
+  void normalize();
 };

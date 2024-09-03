@@ -5,14 +5,16 @@ int main()
   InitWindow(800, 800, "Sim");
   SetTargetFPS(120);
 
-  Looper sim;
+  Looper* sim = new Looper();
+
+  sim->addParticle(Particle(400, 400, 2, 0, 20, RED));
 
   while (!WindowShouldClose())
   {
     BeginDrawing();
     ClearBackground(BLACK);
     
-    sim.update();
+    sim->update();
     
     EndDrawing();
   }
