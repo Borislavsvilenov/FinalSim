@@ -13,7 +13,10 @@ Particle::Particle(float x, float y, float vx, float vy, float mass, Color color
 
 Particle::~Particle()
 {
-
+  delete pos;
+  delete oldPos;
+  delete vel;
+  delete acc;
 }
 
 void Particle::update(Vec2* force)

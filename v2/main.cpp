@@ -7,7 +7,12 @@ int main()
 
   Looper* sim = new Looper();
 
-  sim->addParticle(Particle(400, 400, 2, 0, 20, WHITE));
+  sim->addParticle(new Particle(400, 400, 2, 0, 5, WHITE));
+  sim->addParticle(new Particle(200, 200, 2, 0, 5, WHITE));
+  sim->addParticle(new Particle(600, 600, 2, 0, 5, WHITE));
+  sim->addParticle(new Particle(200, 400, 2, 0, 5, WHITE));
+  sim->addParticle(new Particle(400, 200, 2, 0, 5, WHITE));
+  sim->addParticle(new Particle(600, 400, 2, 0, 5, WHITE));
 
   while (!WindowShouldClose())
   {
@@ -18,7 +23,8 @@ int main()
     
     EndDrawing();
   }
-
+  
+  delete sim;
   return 0;
 }
 

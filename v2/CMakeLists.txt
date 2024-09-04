@@ -14,7 +14,11 @@ add_executable(Sim main.cpp
   objects/Particle.cpp
   objects/Particle.hpp
   objects/Vec2.cpp
-  objects/Vec2.hpp)
+  objects/Vec2.hpp
+  objects/box.cpp
+  objects/box.hpp
+  objects/QT.cpp
+  objects/QT.hpp)
 
 target_link_libraries(Sim PRIVATE raylib)
 target_compile_features(Sim PRIVATE cxx_std_11)
