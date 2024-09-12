@@ -7,6 +7,7 @@
 #include "Particle.hpp"
 #include "QT.hpp"
 #include "box.hpp"
+#include "Cammera.hpp"
 
 
 class Looper
@@ -15,6 +16,7 @@ public:
   std::vector<Particle*> particles;
 
   QT* qt;
+  Cammera* cam;
 
   Looper();
   ~Looper();

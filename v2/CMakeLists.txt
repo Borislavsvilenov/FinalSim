@@ -18,7 +18,9 @@ add_executable(Sim main.cpp
   objects/box.cpp
   objects/box.hpp
   objects/QT.cpp
-  objects/QT.hpp)
+  objects/QT.hpp
+  objects/Cammera.cpp
+  objects/Cammera.hpp)
 
 target_link_libraries(Sim PRIVATE raylib)
 target_compile_features(Sim PRIVATE cxx_std_11)

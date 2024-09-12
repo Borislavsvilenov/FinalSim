@@ -3,6 +3,7 @@
 Looper::Looper()
 {
   qt = new QT(0, 0, 800, 800);
+  cam = new Cammera();
 }
 
 Looper::~Looper()
@@ -19,7 +20,7 @@ void Looper::update()
   for (Particle* p : particles)
   {
     p->update(new Vec2(0, 0.5f));
-    p->draw();
+    cam->drawParticle(p);   
   } 
 }
 
