@@ -40,7 +40,7 @@ int main()
 		BeginDrawing();
 		ClearBackground(BLACK);
 		drawBounds(simS, Camera);
-    QT->draw(Camera);
+    //QT->draw(Camera);
 		
 		for(Particle* p : particles)
 		{
