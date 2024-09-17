@@ -1,5 +1,6 @@
 #pragma once
 #include <raylib.h>
+#include <iostream>
 #include <vector>
 #include <list>
 
@@ -17,6 +18,7 @@ public:
 
   QT* qt;
   Cammera* cam;
+  Box* bounds;
 
   Looper();
   ~Looper();

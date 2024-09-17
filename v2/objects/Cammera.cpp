@@ -13,5 +13,5 @@ void Cammera::mvCam (Vec2* vel) {
 }
 
 void Cammera::drawParticle (Particle* p) {
-  DrawCircle(p->pos->x + 400 - pos->x, p->pos->y + 400 - pos->y, p->mass, p->color);
+  DrawCircle(p->pos->x - pos->x, p->pos->y - pos->y, p->mass, p->color);
 }

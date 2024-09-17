@@ -4,6 +4,7 @@ Looper::Looper()
 {
   qt = new QT(0, 0, 800, 800);
   cam = new Cammera();
+  bounds = new Box(0, 0, 800, 800);
 }
 
 Looper::~Looper()
@@ -20,7 +21,8 @@ void Looper::update()
   for (Particle* p : particles)
   {
     p->update(new Vec2(0, 0.5f));
-    cam->drawParticle(p);   
+    cam->drawParticle(p);
+    bounds->enforceBounds(p);
   } 
 }
 

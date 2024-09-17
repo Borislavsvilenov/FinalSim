@@ -19,6 +19,36 @@ bool Box::checkInbounds(Particle* p) {
   return false;
 }
 
+void Box::enforceBounds(Particle* p)
+{
+  if(!this->checkInbounds(p)) 
+  {
+    if(p->pos->x > size->x)
+    {
+      p->pos->x = size->x;
+      p->vel->x = -abs(p->vel->x);
+    }
+    
+    if(p->pos->y > size->y)
+    {
+      p->pos->y = size->y;
+      p->vel->y = -abs(p->vel->y);
+    }
+
+    if(p->pos->x < pos->x)
+    {
+      p->pos->x = pos->x;
+      p->vel->x = abs(p->vel->x);
+    }
+    
+    if(p->pos->y < pos->y)
+    {
+      p->pos->y = pos->y;
+      p->vel->y = abs(p->vel->y);
+    }
+  }
+}
+
 void Box::draw() {
   DrawRectangle(pos->x, pos->y, size->x, size->y, RED);
 }
