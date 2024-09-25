@@ -36,7 +36,7 @@ void Particle::update(Vec2* force)
 
 void Particle::draw()
 {
-  DrawCircle(pos->x, pos->y, mass, color);
+  DrawCircle(pos->x+100, pos->y+100, mass, RED);
 }
 
 void Particle::applyForce(Vec2* force)
