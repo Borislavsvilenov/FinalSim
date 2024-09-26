@@ -1,5 +1,4 @@
 #include "Particle.hpp"
-#include <iostream>
 
 Particle::Particle(float x, float y, float vx, float vy, float radius, float mass, Color color)
 {
