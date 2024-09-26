@@ -20,6 +20,13 @@ void Looper::update()
 {
   for (Particle* p : particles)
   {
+    for (Particle* o : particles)
+    {
+      if (p != o)
+      {
+        p->checkCollision(o);
+      }
+    }
     p->update(new Vec2(0, 0.5f));
     cam->drawParticle(p);
     bounds->enforceBounds(p);

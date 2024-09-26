@@ -12,7 +12,7 @@ class QT
 public:
   Box* box;
   std::list<Particle*> particles;
-  int size = 6;
+  int size = 3;
     
   bool subdivided = false;
   QT* topLeft = {};
