@@ -50,10 +50,38 @@ void Particle::handleCollision(Particle* p, Vec2* diff, float d)
   float overlap = (radius + p->radius) - d;
   diff->scale(1/d);
   diff->scale(overlap / 2);
+  
+  Vec2* vcp1 = new Vec2();
+  Vec2* vcp2 = new Vec2();
+
+  vcp1->copy(vel);
+  vcp2->copy(p->vel);
+
+  vcp1->sub(vcp2);
+
+  float velNorm = vcp1->dot(diff);
+  float totalMass = mass + p->mass;
 
   pos->sub(diff);
-
   p->pos->add(diff); 
+
+  Vec2* d1 = new Vec2();
+  Vec2* d2 = new Vec2();
+
+  d1->copy(diff);
+  d2->copy(diff);
+
+  d1->scale(velNorm * p->mass / totalMass);
+  d2->scale(velNorm * mass / totalMass);
+
+  vel->sub(d1);
+  p->vel->sub(d2);
+
+  delete vcp1;
+  delete vcp2;
+  delete d1;
+  delete d2;
+
 }
 
 void Particle::checkCollision(Particle* p)

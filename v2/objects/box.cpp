@@ -25,28 +25,24 @@ void Box::enforceBounds(Particle* p)
   {
     p->pos->x = size->x - p->radius;
     p->vel->x = -abs(p->vel->x) * bounciness;
-    p->oldPos->x = p->pos->x - p->vel->x;
   }
 
   if(p->pos->y > size->y - p->radius)
   {
     p->pos->y = size->y - p->radius;
     p->vel->y = -abs(p->vel->y) * bounciness;
-    p->oldPos->y = p->pos->y - p->vel->y;
   }
 
   if(p->pos->x < pos->x + p->radius)
   {
     p->pos->x = pos->x + p->radius;
     p->vel->x = abs(p->vel->x) * bounciness;
-    p->oldPos->x = p->pos->x - p->vel->x;
   }
 
   if(p->pos->y < pos->y + p->radius)
   {
     p->pos->y = pos->y + p->radius;
     p->vel->y = abs(p->vel->y) * bounciness;
-    p->oldPos->y = p->pos->y - p->vel->y;
   }
 }
 
