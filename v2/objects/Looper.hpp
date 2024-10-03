@@ -20,6 +20,8 @@ public:
   Cammera* cam;
   Box* bounds;
 
+  int frame;
+
   Looper();
   ~Looper();
   

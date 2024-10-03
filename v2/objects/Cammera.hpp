@@ -2,6 +2,7 @@
 #include <raylib.h>
 
 #include "Vec2.hpp"
+#include "box.hpp"
 #include "Particle.hpp"
 
 class Cammera
@@ -14,5 +15,6 @@ public:
   
   void mvCam (Vec2* vel);
   
-  void drawParticle (Particle* p);
+  void draw (Particle* p);
+  void draw (Box* b);
 };

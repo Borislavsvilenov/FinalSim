@@ -7,11 +7,6 @@ int main()
 
   Looper* sim = new Looper();
 
-  sim->addParticle(new Particle(400, 400, 2, 0, 5, 5, WHITE));
-  sim->addParticle(new Particle(600, 200, 2, 0, 5, 5, WHITE));
-  sim->addParticle(new Particle(200, 600, 2, 0, 5, 5, WHITE));
-  sim->addParticle(new Particle(200, 200, 2, 0, 5, 5, WHITE));
-  sim->addParticle(new Particle(600, 600, 2, 0, 5, 5, WHITE));
 
   while (!WindowShouldClose())
   {
@@ -21,6 +16,26 @@ int main()
     sim->update();
     
     EndDrawing();
+  
+    if(IsKeyDown(KEY_S))
+		{
+			sim->cam->pos->y += 5;
+		}
+
+		if(IsKeyDown(KEY_W))
+		{
+			sim->cam->pos->y -= 5;
+		}
+
+		if(IsKeyDown(KEY_A))
+		{
+			sim->cam->pos->x -= 5;
+		}	
+
+		if(IsKeyDown(KEY_D))
+		{
+			sim->cam->pos->x += 5;
+		}  
   }
   
   delete sim;
