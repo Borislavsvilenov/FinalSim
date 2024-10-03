@@ -39,6 +39,9 @@ void Looper::update()
     addParticle(new Particle(400, 400, 2, 0, 5, 5, WHITE));
   }
   frame++;
+  DrawFPS(0,0);
+  DrawText(TextFormat("Particles: %i", particles.size()), 0, 20, 20, WHITE);
+
 }
 
 void Looper::addParticle(Particle* p)
