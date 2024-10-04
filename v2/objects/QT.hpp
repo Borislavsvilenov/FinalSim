@@ -6,13 +6,14 @@
 #include "Vec2.hpp"
 #include "Particle.hpp"
 #include "box.hpp"
+#include "Cammera.hpp"
 
 class QT
 {
 public:
   Box* box;
   std::list<Particle*> particles;
-  int size = 3;
+  int size = 5;
     
   bool subdivided = false;
   QT* topLeft = {};
@@ -27,7 +28,7 @@ public:
   
   void subdivide();
   void addParticle(Particle* p);
-  void draw();
+  void draw(Cammera* cam);
 
 };
   

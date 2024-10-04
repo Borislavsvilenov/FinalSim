@@ -36,13 +36,13 @@ void QT::subdivide()
       if (topLeft->box->checkInbounds(p)) {
         topLeft->addParticle(p);
       }
-      if (topRight->box->checkInbounds(p)) {
+      else if (topRight->box->checkInbounds(p)) {
         topRight->addParticle(p);
       }
-      if (bottomLeft->box->checkInbounds(p)) {
+      else if (bottomLeft->box->checkInbounds(p)) {
         bottomLeft->addParticle(p);
       }
-      if (bottomRight->box->checkInbounds(p)) {
+      else if (bottomRight->box->checkInbounds(p)) {
         bottomRight->addParticle(p);
       }
     }
@@ -75,7 +75,13 @@ void QT::addParticle(Particle* p)
   }
 }
 
-void QT::draw()
+void QT::draw(Cammera* cam)
 {
-  box->draw();
+  cam->draw(box);
+  if(subdivided) {
+    topLeft->draw(cam);
+    topRight->draw(cam);
+    bottomLeft->draw(cam);
+    bottomRight->draw(cam);
+  }
 }

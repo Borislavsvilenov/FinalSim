@@ -3,7 +3,7 @@
 int main()
 {
   InitWindow(800, 800, "Sim");
-  SetTargetFPS(120);
+  SetTargetFPS(60);
 
   Looper* sim = new Looper();
 

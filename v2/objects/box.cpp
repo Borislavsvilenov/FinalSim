@@ -52,4 +52,5 @@ void Box::enforceBounds(Particle* p)
 
 void Box::draw() {
   DrawRectangle(pos->x, pos->y, size->x, size->y, RED);
+  DrawRectangle(pos->x + 2, pos->y + 2, size->x - 4, size->y -4, BLACK);
 }
