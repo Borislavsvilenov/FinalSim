@@ -54,22 +54,23 @@ void QT::subdivide()
 
 void QT::addParticle(Particle* p)
 { 
-  if (!subdivided) {
+  if (box->checkInbounds(p)) {
     particles.push_back(p);
-    if (particles.size() >= size) {
-      this->subdivide();
-    }
-  } else {
-    if (topLeft->box->checkInbounds(p)) {
+
+    if (!subdivided) {
+      if (particles.size() >= size) {
+        this->subdivide();
+        for (Particle* pl : particles) {
+          topLeft->addParticle(pl);
+          topRight->addParticle(pl);
+          bottomLeft->addParticle(pl);
+          bottomRight->addParticle(pl);
+        }
+      }
+    } else {
       topLeft->addParticle(p);
-    }
-    if (topRight->box->checkInbounds(p)) {
       topRight->addParticle(p);
-    }
-    if (bottomLeft->box->checkInbounds(p)) {
       bottomLeft->addParticle(p);
-    }
-    if (bottomRight->box->checkInbounds(p)) {
       bottomRight->addParticle(p);
     }
   }
