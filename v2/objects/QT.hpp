@@ -28,6 +28,7 @@ public:
   
   void subdivide();
   void addParticle(Particle* p);
+  void clear();
   void draw(Cammera* cam);
 
 };

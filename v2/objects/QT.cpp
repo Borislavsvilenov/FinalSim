@@ -76,6 +76,17 @@ void QT::addParticle(Particle* p)
   }
 }
 
+void QT::clear()
+{
+  particles.clear();
+  if(subdivided) {
+    topLeft->clear();
+    topRight->clear();
+    bottomLeft->clear();
+    bottomRight->clear();
+  }
+}
+
 void QT::draw(Cammera* cam)
 {
   cam->draw(box);
