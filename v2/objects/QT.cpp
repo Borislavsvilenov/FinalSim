@@ -80,10 +80,11 @@ void QT::clear()
 {
   particles.clear();
   if(subdivided) {
-    topLeft->clear();
-    topRight->clear();
-    bottomLeft->clear();
-    bottomRight->clear();
+    delete topLeft;
+    delete topRight;
+    delete bottomLeft;
+    delete bottomRight;
+    subdivided = false;
   }
 }
 

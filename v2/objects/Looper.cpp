@@ -21,6 +21,7 @@ void Looper::update()
 {
   cam->draw(bounds);
   qt->draw(cam);
+  qt->clear();
   for (Particle* p : particles) {
     qt->addParticle(p);
   }
@@ -38,12 +39,11 @@ void Looper::update()
     }
     cam->draw(p);
   } 
-  if(frame % 5 == 1)
+  if(frame % 10 == 1)
   {
     addParticle(new Particle(400, 400, 2, 0, 5, 5, WHITE));
   }
   frame++;
-  qt->clear();
 
   DrawFPS(0,0);
   DrawText(TextFormat("Particles: %i", particles.size()), 0, 20, 20, WHITE);
