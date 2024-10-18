@@ -16,6 +16,7 @@ public:
   ~Box();
   
   bool checkInbounds(Particle* p);
+  bool intersects(Box* b);
   void enforceBounds(Particle* p);
   void draw();
 };

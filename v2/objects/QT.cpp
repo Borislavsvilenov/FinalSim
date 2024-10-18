@@ -18,9 +18,9 @@ QT::~QT()
   }
 }
 
-std::list<Particle*> QT::fetch()
+void QT::fetch(std::vector<Particle*>& l, Box* area)
 {
-  return particles;
+  return;
 }
 
 void QT::subdivide()
@@ -55,17 +55,11 @@ void QT::subdivide()
 void QT::addParticle(Particle* p)
 { 
   if (box->checkInbounds(p)) {
-    particles.push_back(p);
+  particles.push_back(p);
 
     if (!subdivided) {
       if (particles.size() >= size) {
         this->subdivide();
-        for (Particle* pl : particles) {
-          topLeft->addParticle(pl);
-          topRight->addParticle(pl);
-          bottomLeft->addParticle(pl);
-          bottomRight->addParticle(pl);
-        }
       }
     } else {
       topLeft->addParticle(p);

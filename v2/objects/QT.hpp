@@ -24,7 +24,7 @@ public:
   QT(float x, float y, float w, float h);
   ~QT();
   
-  std::list<Particle*> fetch();
+  void fetch(std::vector<Particle*>& l, Box* area);
   
   void subdivide();
   void addParticle(Particle* p);

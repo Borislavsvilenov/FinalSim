@@ -19,6 +19,13 @@ bool Box::checkInbounds(Particle* p) {
   return false;
 }
 
+bool Box::intersects(Box* b) {
+  return !(pos->x > b->pos->x + b->size->x || 
+      pos->x + size->x < b->pos->x || 
+      pos->y > b->pos->y + b->size->y || 
+      pos->y + size->y < b->pos->y);
+}
+
 void Box::enforceBounds(Particle* p)
 {
   if(p->pos->x > size->x - p->radius)
