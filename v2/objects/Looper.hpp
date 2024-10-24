@@ -15,10 +15,12 @@ class Looper
 {
 public:
   std::vector<Particle*> particles;
+  std::vector<Particle*> closeP;
 
   QT* qt;
   Cammera* cam;
   Box* bounds;
+  Box* aroundP;
 
   int frame;
 

@@ -20,6 +20,20 @@ QT::~QT()
 
 void QT::fetch(std::vector<Particle*>& l, Box* area)
 {
+  if (area->intersects(box)) {
+    if (subdivided) {
+      topLeft->fetch(l, area);
+      topRight->fetch(l, area);
+      bottomLeft->fetch(l, area);
+      bottomRight->fetch(l, area);
+    } else {
+      for (Particle* p : particles) {
+        if(area->checkInbounds(p)) {
+          l.push_back(p);
+        }
+      }
+    }
+  }
   return;
 }
 

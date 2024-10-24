@@ -13,6 +13,7 @@ public:
   float bounciness = 0.8;
 
   Box(float x, float y, float w, float h);
+  Box();
   ~Box();
   
   bool checkInbounds(Particle* p);

@@ -5,6 +5,11 @@ Box::Box(float x, float y, float w, float h) {
   size = new Vec2(w, h);
 }
 
+Box::Box() {
+  pos = new Vec2(0, 0);
+  size = new Vec2(0, 0);
+}
+
 Box::~Box() {
   delete pos;
   delete size;

@@ -5,6 +5,7 @@ Looper::Looper()
   qt = new QT(0, 0, 800, 800);
   cam = new Cammera();
   bounds = new Box(0, 0, 800, 800);
+  aroundP = new Box();
   frame = 0;
 }
 
@@ -29,14 +30,29 @@ void Looper::update()
   {
     p->update(new Vec2(0, 0.5f));
     bounds->enforceBounds(p);
+    
+    aroundP->pos->x = p->pos->x - 10;
+    aroundP->pos->y = p->pos->y - 10;
+    aroundP->size->x = p->pos->x + 10;
+    aroundP->size->y = p->pos->y + 10;
 
-    for (Particle* o : particles)
+    qt->fetch(closeP, aroundP);
+
+    for (Particle* o : closeP) {
+      if (p != o) {
+        p->checkCollision(o);
+      }
+    }
+
+    closeP.clear();
+
+    /* for (Particle* o : particles)
     {
       if (p != o)
       {
         p->checkCollision(o);
       }
-    }
+    } */
     cam->draw(p);
   } 
   if(frame % 10 == 1)
