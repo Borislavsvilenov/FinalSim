@@ -62,6 +62,7 @@ void QT::subdivide()
     }
 
     subdivided = true;
+    particles.clear();
 
   }
 }
@@ -69,7 +70,7 @@ void QT::subdivide()
 void QT::addParticle(Particle* p)
 { 
   if (box->checkInbounds(p)) {
-  particles.push_back(p);
+    particles.push_back(p);
 
     if (!subdivided) {
       if (particles.size() >= size) {

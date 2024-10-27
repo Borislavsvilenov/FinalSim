@@ -53,6 +53,7 @@ void Looper::update()
         p->checkCollision(o);
       }
     } */
+
     cam->draw(p);
   } 
   if(frame % 10 == 1)
