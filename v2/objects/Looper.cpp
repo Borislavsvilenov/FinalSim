@@ -3,6 +3,7 @@
 Looper::Looper()
 {
   qt = new QT(0, 0, 800, 800);
+  tp = new ThreadPool();
   cam = new Cammera();
   bounds = new Box(0, 0, 800, 800);
   aroundP = new Box();

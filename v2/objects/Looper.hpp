@@ -9,6 +9,7 @@
 #include "QT.hpp"
 #include "box.hpp"
 #include "Cammera.hpp"
+#include "ThreadPool.hpp"
 
 
 class Looper
@@ -21,6 +22,7 @@ public:
   Cammera* cam;
   Box* bounds;
   Box* aroundP;
+  ThreadPool* tp;
 
   int frame;
 
