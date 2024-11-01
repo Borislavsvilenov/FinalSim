@@ -1,6 +1,6 @@
 #include "ThreadPool.hpp"
 
-ThreadPool::ThreadPool () {
+ThreadPool::ThreadPool () : stop(false) {
 
 }
 
@@ -9,14 +9,15 @@ ThreadPool::~ThreadPool () {
 }
 
 void ThreadPool::createNewThread() {
-
+  
 }
 
 void ThreadPool::removeThread() {
 
 }
 
-void ThreadPool::addToQ(std::function<void()>) {
+template<class F>
+void ThreadPool::addToQ(F&& task) {
 
 }
 

@@ -15,13 +15,16 @@ public:
   std::mutex Mutex;
   std::condition_variable condition; 
 
+  bool stop;
+
   ThreadPool();
   ~ThreadPool();
 
   void createNewThread();
   void removeThread();
 
-  void addToQ(std::function<void()>);
+  template<class F>
+  void addToQ(F&& task);
 
 
 };

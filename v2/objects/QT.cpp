@@ -1,5 +1,4 @@
 #include "QT.hpp"
-#include <iostream>
 
 QT::QT(float x, float y, float w, float h)
 {
