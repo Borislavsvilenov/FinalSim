@@ -1,8 +1,9 @@
 #include "QT.hpp"
 
-QT::QT(float x, float y, float w, float h)
+QT::QT(float x, float y, float w, float h, bool mt)
 {
   box = new Box(x, y, w, h);
+  MainTree = mt;
 }
 
 QT::~QT()
@@ -17,14 +18,14 @@ QT::~QT()
   }
 }
 
-void QT::fetch(std::vector<Particle*>& l, Box* area)
+void QT::fetch(std::vector<Particle*>& l, Box* area, ThreadPool* tp)
 {
   if (area->intersects(box)) {
     if (subdivided) {
-      topLeft->fetch(l, area);
-      topRight->fetch(l, area);
-      bottomLeft->fetch(l, area);
-      bottomRight->fetch(l, area);
+      topLeft->fetch(l, area, tp);
+      topRight->fetch(l, area, tp);
+      bottomLeft->fetch(l, area, tp);
+      bottomRight->fetch(l, area, tp);
     } else {
       for (Particle* p : particles) {
         if(area->checkInbounds(p)) {
@@ -40,10 +41,10 @@ void QT::subdivide()
 {
   if (!subdivided) {
 
-    topLeft = new QT(box->pos->x, box->pos->y, box->size->x / 2, box->size->y / 2);
-    topRight = new QT(box->pos->x + box->size->x / 2, box->pos->y, box->size->x / 2, box->size->y / 2);
-    bottomLeft = new QT(box->pos->x, box->pos->y + box->size->y / 2, box->size->x / 2, box->size->y / 2);
-    bottomRight = new QT(box->pos->x + box->size->x / 2, box->pos->y + box->size->y / 2, box->size->x / 2, box->size->y / 2);
+    topLeft = new QT(box->pos->x, box->pos->y, box->size->x / 2, box->size->y / 2, false);
+    topRight = new QT(box->pos->x + box->size->x / 2, box->pos->y, box->size->x / 2, box->size->y / 2, false);
+    bottomLeft = new QT(box->pos->x, box->pos->y + box->size->y / 2, box->size->x / 2, box->size->y / 2, false);
+    bottomRight = new QT(box->pos->x + box->size->x / 2, box->pos->y + box->size->y / 2, box->size->x / 2, box->size->y / 2, false);
 
     for (Particle* p : particles) {
       if (topLeft->box->checkInbounds(p)) {

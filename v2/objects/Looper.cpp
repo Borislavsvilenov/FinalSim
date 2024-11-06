@@ -2,7 +2,7 @@
 
 Looper::Looper()
 {
-  qt = new QT(0, 0, 800, 800);
+  qt = new QT(0, 0, 800, 800, true);
   tp = new ThreadPool();
   cam = new Cammera();
   bounds = new Box(0, 0, 800, 800);
@@ -22,7 +22,6 @@ Looper::~Looper()
 void Looper::update()
 {
   cam->draw(bounds);
-  qt->draw(cam);
   qt->clear();
   for (Particle* p : particles) {
     qt->addParticle(p);
@@ -37,7 +36,7 @@ void Looper::update()
     aroundP->size->x = p->pos->x + 10;
     aroundP->size->y = p->pos->y + 10;
 
-    qt->fetch(closeP, aroundP);
+    qt->fetch(closeP, aroundP, tp);
 
     for (Particle* o : closeP) {
       if (p != o) {

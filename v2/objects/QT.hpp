@@ -4,6 +4,7 @@
 #include <list>
 
 #include "Vec2.hpp"
+#include "ThreadPool.hpp"
 #include "Particle.hpp"
 #include "box.hpp"
 #include "Cammera.hpp"
@@ -14,6 +15,7 @@ public:
   Box* box;
   std::list<Particle*> particles;
   int size = 10;
+  bool MainTree;
     
   bool subdivided = false;
   QT* topLeft = {};
@@ -21,10 +23,10 @@ public:
   QT* bottomLeft = {};
   QT* bottomRight = {};
 
-  QT(float x, float y, float w, float h);
+  QT(float x, float y, float w, float h, bool mt);
   ~QT();
   
-  void fetch(std::vector<Particle*>& l, Box* area);
+  void fetch(std::vector<Particle*>& l, Box* area, ThreadPool* tp);
   
   void subdivide();
   void addParticle(Particle* p);

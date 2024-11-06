@@ -26,5 +26,8 @@ public:
   template<class F>
   void addToQ(F&& task);
 
+  template<class F>
+  void execute(F&& task);
+
 
 };

@@ -1,10 +1,7 @@
 #pragma once
 #include <raylib.h>
-#include <iostream>
 #include <vector>
-#include <list>
 
-#include "Vec2.hpp"
 #include "Particle.hpp"
 #include "QT.hpp"
 #include "box.hpp"
