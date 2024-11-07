@@ -14,7 +14,7 @@ class QT
 public:
   Box* box;
   std::list<Particle*> particles;
-  int size = 10;
+  int size = 50;
   bool MainTree;
     
   bool subdivided = false;

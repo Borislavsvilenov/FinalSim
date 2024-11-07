@@ -56,7 +56,7 @@ void Looper::update()
 
     cam->draw(p);
   } 
-  if(frame % 10 == 1)
+  if(frame % 5 == 1)
   {
     addParticle(new Particle(400, 400, 2, 0, 5, 5, WHITE));
   }
