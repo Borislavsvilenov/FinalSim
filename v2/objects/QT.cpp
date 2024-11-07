@@ -19,39 +19,39 @@ QT::~QT()
 }
 
 void QT::fetch(std::vector<Particle*>& l, Box* area, ThreadPool* pool, std::mutex& resultMutex, int depth) {
-    if (!area->intersects(box)) {
-        return;
-    }
+  if (!area->intersects(box)) {
+    return;
+  }
 
-    if (subdivided) {
-        if (pool && depth < 1) {  
-            std::vector<std::future<void>> futures;
+  if (subdivided) {
+    if (pool && depth < 1) {  
+      std::vector<std::future<void>> futures;
 
-            futures.push_back(pool->enqueue([&] { topLeft->fetch(l, area, pool, resultMutex, depth + 1); }));
-            futures.push_back(pool->enqueue([&] { topRight->fetch(l, area, pool, resultMutex, depth + 1); }));
-            futures.push_back(pool->enqueue([&] { bottomLeft->fetch(l, area, pool, resultMutex, depth + 1); }));
-            futures.push_back(pool->enqueue([&] { bottomRight->fetch(l, area, pool, resultMutex, depth + 1); }));
+      futures.push_back(pool->enqueue([&] { topLeft->fetch(l, area, pool, resultMutex, depth + 1); }));
+      futures.push_back(pool->enqueue([&] { topRight->fetch(l, area, pool, resultMutex, depth + 1); }));
+      futures.push_back(pool->enqueue([&] { bottomLeft->fetch(l, area, pool, resultMutex, depth + 1); }));
+      futures.push_back(pool->enqueue([&] { bottomRight->fetch(l, area, pool, resultMutex, depth + 1); }));
 
-            for (auto& f : futures) {
-                f.get();  
-            }
-        } else {
-            topLeft->fetch(l, area, pool, resultMutex, depth + 1);
-            topRight->fetch(l, area, pool, resultMutex, depth + 1);
-            bottomLeft->fetch(l, area, pool, resultMutex, depth + 1);
-            bottomRight->fetch(l, area, pool, resultMutex, depth + 1);
-        }
+      for (auto& f : futures) {
+        f.get();  
+      }
     } else {
-        std::vector<Particle*> localParticles;
-        for (Particle* p : particles) {
-            if (area->checkInbounds(p)) {
-                localParticles.push_back(p);
-            }
-        }
-
-        std::lock_guard<std::mutex> lock(resultMutex);
-        l.insert(l.end(), localParticles.begin(), localParticles.end());
+      topLeft->fetch(l, area, pool, resultMutex, depth + 1);
+      topRight->fetch(l, area, pool, resultMutex, depth + 1);
+      bottomLeft->fetch(l, area, pool, resultMutex, depth + 1);
+      bottomRight->fetch(l, area, pool, resultMutex, depth + 1);
     }
+  } else {
+    std::vector<Particle*> localParticles;
+    for (Particle* p : particles) {
+      if (area->checkInbounds(p)) {
+        localParticles.push_back(p);
+      }
+    }
+
+    std::lock_guard<std::mutex> lock(resultMutex);
+    l.insert(l.end(), localParticles.begin(), localParticles.end());
+  }
 }
 
 void QT::subdivide()
