@@ -3,7 +3,7 @@
 Looper::Looper()
 {
   qt = new QT(0, 0, 800, 800, true);
-  tp = new ThreadPool();
+  tp = new ThreadPool(std::thread::hardware_concurrency());
   cam = new Cammera();
   bounds = new Box(0, 0, 800, 800);
   aroundP = new Box();
@@ -36,7 +36,7 @@ void Looper::update()
     aroundP->size->x = p->pos->x + 10;
     aroundP->size->y = p->pos->y + 10;
 
-    qt->fetch(closeP, aroundP, tp);
+    qt->fetch(closeP, aroundP, tp, resultMutex, 0);
 
     for (Particle* o : closeP) {
       if (p != o) {

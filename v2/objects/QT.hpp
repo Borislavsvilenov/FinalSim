@@ -25,8 +25,8 @@ public:
 
   QT(float x, float y, float w, float h, bool mt);
   ~QT();
-  
-  void fetch(std::vector<Particle*>& l, Box* area, ThreadPool* tp);
+
+  void fetch(std::vector<Particle*>& l, Box* area, ThreadPool* tp, std::mutex& resultMutex, int depth);
   
   void subdivide();
   void addParticle(Particle* p);

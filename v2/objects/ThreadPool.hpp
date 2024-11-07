@@ -1,33 +1,46 @@
 #pragma once
-#include <iostream>
 #include <vector>
 #include <thread>
 #include <queue>
-#include <functional>
 #include <mutex>
 #include <condition_variable>
+#include <future>
+#include <functional>
+#include <stdexcept>
 
 class ThreadPool {
+  public:
+    ThreadPool(size_t numThreads);
 
-public:
-  std::vector<std::thread*> threads;
-  std::queue<std::function<void()>> queue;
-  std::mutex Mutex;
-  std::condition_variable condition; 
+    template<class F, class... Args>
+      auto enqueue(F&& f, Args&&... args) -> std::future<decltype(f(args...))> {
+        using return_type = decltype(f(args...));
 
-  bool stop;
+        auto task = std::make_shared<std::packaged_task<return_type()>>(std::bind(std::forward<F>(f), std::forward<Args>(args)...));
 
-  ThreadPool();
-  ~ThreadPool();
+        std::future<return_type> res = task->get_future();
 
-  void createNewThread();
-  void removeThread();
+        {
+          std::unique_lock<std::mutex> lock(queueMutex);
 
-  template<class F>
-  void addToQ(F&& task);
+          if (stop)
+            throw std::runtime_error("enqueue on stopped ThreadPool");
 
-  template<class F>
-  void execute(F&& task);
+          tasks.emplace([task]() { (*task)(); });
+        }
 
+        condition.notify_one();
 
+        return res;
+      }
+
+    ~ThreadPool();
+
+  private:
+    std::vector<std::thread> workers;
+    std::queue<std::function<void()>> tasks;
+
+    std::mutex queueMutex;
+    std::condition_variable condition;
+    bool stop;
 };
