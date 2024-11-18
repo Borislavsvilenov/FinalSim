@@ -35,9 +35,24 @@ int main()
 		if(IsKeyDown(KEY_D))
 		{
 			sim->cam->pos->x += 5;
-		}  
+		}
+
+    if(IsKeyPressed(KEY_SPACE))
+    {
+      sim->paused = !sim->paused;
+    }
+
+    if(IsKeyPressed(KEY_B))
+    {
+      sim->spawn = !sim->spawn;
+    }
+
+    if(IsKeyPressed(KEY_M))
+    {
+      sim->multithreaded = !sim->multithreaded;
+    }
   }
-  
+
   delete sim;
   return 0;
 }

@@ -23,6 +23,9 @@ public:
   std::mutex resultMutex;
 
   int frame;
+  bool paused;
+  bool multithreaded;
+  bool spawn;
 
   Looper();
   ~Looper();
