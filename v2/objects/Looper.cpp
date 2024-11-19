@@ -77,7 +77,7 @@ void Looper::update()
 
   DrawFPS(0,0);
   DrawText(TextFormat("Particles: %i", particles.size()), 0, 20, 20, WHITE);
-  DrawText(TextFormat("Pause: SPACE"), 0, 40, 20, WHITE);
+  DrawText(TextFormat("Pause: SPACE"), 0, 40, 10, WHITE);
 
 }
 
