@@ -51,6 +51,11 @@ int main()
     {
       sim->multithreaded = !sim->multithreaded;
     }
+
+    if(IsKeyPressed(KEY_T))
+    {
+      sim->showMenu = !sim->showMenu;
+    }
   }
 
   delete sim;

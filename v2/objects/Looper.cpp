@@ -8,10 +8,16 @@ Looper::Looper()
   bounds = new Box(0, 0, 800, 800);
   aroundP = new Box();
   frame = 0;
+  fontSize = 15;
 
   paused = false;
   spawn = true;
   multithreaded = false;
+  showMenu = true;
+  
+  pColor = GREEN;
+  tColor = GREEN;
+  mColor = RED;
 }
 
 Looper::~Looper()
@@ -66,7 +72,7 @@ void Looper::update()
     } 
     if(frame % 5 == 1 && spawn)
     {
-      addParticle(new Particle(400, 400, 2, 0, 10, 5, WHITE));
+      addParticle(new Particle(400, 400, 2, 0, 10, 5, PINK));
     }
     frame++;
   }
@@ -75,9 +81,31 @@ void Looper::update()
     cam->draw(p);
   }
 
+  if (paused) {
+    pColor = RED;
+  } else {
+    pColor = GREEN;
+  }
+
+  if (multithreaded) {
+    mColor = GREEN;
+  } else {
+    mColor = RED;
+  }
+
+  if (showMenu) {
+    tColor = GREEN;
+  } else {
+    tColor = RED;
+  }
+
   DrawFPS(0,0);
-  DrawText(TextFormat("Particles: %i", particles.size()), 0, 20, 20, WHITE);
-  DrawText(TextFormat("Pause: SPACE"), 0, 40, 10, WHITE);
+  DrawText(TextFormat("Particles: %i", particles.size()), 0, 1*fontSize + 3, fontSize, WHITE);
+  DrawText(TextFormat("Pause: SPACE"), 0, 2*fontSize + 3, fontSize, pColor);
+  DrawText(TextFormat("Toggle menu: T"), 0, 3*fontSize + 3, fontSize, tColor);
+  if (showMenu) {
+    DrawText(TextFormat("Multithread: M"), 0, 4*fontSize + 3, fontSize, mColor);
+  }
 
 }
 

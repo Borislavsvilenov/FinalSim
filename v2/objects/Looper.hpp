@@ -23,9 +23,16 @@ public:
   std::mutex resultMutex;
 
   int frame;
+  int fontSize;
+
   bool paused;
   bool multithreaded;
   bool spawn;
+  bool showMenu;
+
+  Color pColor;
+  Color tColor;
+  Color mColor;
 
   Looper();
   ~Looper();
