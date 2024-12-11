@@ -24,6 +24,7 @@ public:
 
   int frame;
   int fontSize;
+  int dt = 1;
 
   bool paused;
   bool multithreaded;
@@ -33,6 +34,7 @@ public:
   Color pColor;
   Color tColor;
   Color mColor;
+  Color sColor;
 
   Looper();
   ~Looper();

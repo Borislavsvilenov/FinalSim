@@ -19,7 +19,7 @@ Particle::~Particle()
   delete acc;
 }
 
-void Particle::update(Vec2* force)
+void Particle::update(Vec2* force, float dt)
 {  
   vel->x = pos->x - oldPos->x;
   vel->y = pos->y - oldPos->y;
@@ -29,6 +29,7 @@ void Particle::update(Vec2* force)
   oldPos->copy(pos);
   
   vel->add(acc);
+
   pos->add(vel);
   
   acc->x = 0;

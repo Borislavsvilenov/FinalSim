@@ -1,6 +1,7 @@
 #pragma once
 #include "Vec2.hpp"
 #include <raylib.h>
+#include <iostream>
 
 class Particle
 {
@@ -17,7 +18,7 @@ class Particle
     Particle(float x, float y, float vx, float vy, float radius, float mass, Color color);
     ~Particle();
 
-    void update(Vec2* force);
+    void update(Vec2* force, float dt);
     void draw();
 
     void applyForce(Vec2* force);

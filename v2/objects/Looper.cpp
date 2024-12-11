@@ -18,6 +18,7 @@ Looper::Looper()
   pColor = GREEN;
   tColor = GREEN;
   mColor = RED;
+  sColor = GREEN;
 }
 
 Looper::~Looper()
@@ -40,7 +41,7 @@ void Looper::update()
     }
     for (Particle* p : particles)
     {
-      p->update(new Vec2(0, 0.5f));
+      p->update(new Vec2(0, 0.5f), dt);
       bounds->enforceBounds(p);
 
       aroundP->pos->x = p->pos->x - (1.5*p->radius);
@@ -72,7 +73,7 @@ void Looper::update()
     } 
     if(frame % 5 == 1 && spawn)
     {
-      addParticle(new Particle(400, 400, 2, 0, 10, 5, PINK));
+      addParticle(new Particle(400, 400, 2*dt, 0, 10, 5, WHITE));
     }
     frame++;
   }
@@ -99,12 +100,20 @@ void Looper::update()
     tColor = RED;
   }
 
+  if (spawn) {
+    sColor = GREEN;
+  } else {
+    sColor = RED;
+  }
+
   DrawFPS(0,0);
   DrawText(TextFormat("Particles: %i", particles.size()), 0, 1*fontSize + 3, fontSize, WHITE);
   DrawText(TextFormat("Pause: SPACE"), 0, 2*fontSize + 3, fontSize, pColor);
   DrawText(TextFormat("Toggle menu: T"), 0, 3*fontSize + 3, fontSize, tColor);
   if (showMenu) {
     DrawText(TextFormat("Multithread: M"), 0, 4*fontSize + 3, fontSize, mColor);
+    DrawText(TextFormat("Spawn: B"), 0, 5*fontSize + 3, fontSize, sColor);
+    DrawText(TextFormat("Move: W-A-S-D"), 0, 6*fontSize + 3, fontSize, WHITE);
   }
 
 }
