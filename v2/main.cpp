@@ -56,6 +56,11 @@ int main()
     {
       sim->showMenu = !sim->showMenu;
     }
+
+    if(IsKeyPressed(KEY_Q))
+    {
+      sim->showQT = !sim->showQT;
+    }
   }
 
   delete sim;

@@ -30,11 +30,13 @@ public:
   bool multithreaded;
   bool spawn;
   bool showMenu;
+  bool showQT;
 
   Color pColor;
   Color tColor;
   Color mColor;
   Color sColor;
+  Color qColor;
 
   Looper();
   ~Looper();
