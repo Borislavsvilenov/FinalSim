@@ -32,6 +32,55 @@ Looper::~Looper()
   }
 }
 
+void Looper::updateParticle(Particle* p) 
+{
+  p->update(new Vec2(0, 0.5f), dt);
+  bounds->enforceBounds(p);
+  
+  Box* aroundP = new Box();
+  std::vector<Particle*> closeP;
+
+  aroundP->pos->x = p->pos->x - (1.5*p->radius);
+  aroundP->pos->y = p->pos->y - (1.5*p->radius);
+  aroundP->size->x = p->pos->x + (1.5*p->radius);
+  aroundP->size->y = p->pos->y + (1.5*p->radius);
+  
+  qt->fetch(closeP, aroundP);
+
+  /*
+     if(multithreaded) {
+     qt->fetch(closeP, aroundP, tp, resultMutex, 0);
+     } else {
+     qt->fetch(closeP, aroundP);
+     } 
+     */
+
+  for (Particle* o : closeP) {
+    if (p != o) {
+      p->checkCollision(o, multithreaded);
+    }
+  }
+
+  /*
+     if (multithreaded) {
+     for (Particle* o: closeP) {
+     if (p != o) {
+     tp->enqueue([p, o, this] { p->checkCollision(o, this->resultMutex); });
+     }
+     }
+     } else {
+     for (Particle* o: closeP) {
+     if (p != o) {
+     p->checkCollision(o, multithreaded);
+     }
+     }
+     }
+     */
+
+  closeP.clear();
+  delete(aroundP);
+}
+
 void Looper::update()
 {
   cam->draw(bounds);
@@ -42,44 +91,22 @@ void Looper::update()
 
   if(!paused) {
     qt->clear();
+
     for (Particle* p : particles) {
       qt->addParticle(p);
     }
-    for (Particle* p : particles)
-    {
-      p->update(new Vec2(0, 0.5f), dt);
-      bounds->enforceBounds(p);
 
-      aroundP->pos->x = p->pos->x - (1.5*p->radius);
-      aroundP->pos->y = p->pos->y - (1.5*p->radius);
-      aroundP->size->x = p->pos->x + (1.5*p->radius);
-      aroundP->size->y = p->pos->y + (1.5*p->radius);
-
-      if(multithreaded) {
-        qt->fetch(closeP, aroundP, tp, resultMutex, 0);
+    for (Particle* p : particles) {
+      if (multithreaded) {
+        tp->enqueue([p, this] {updateParticle(p); });
       } else {
-        qt->fetch(closeP, aroundP);
+        updateParticle(p);
       }
+    }
 
-      for (Particle* o : closeP) {
-        if (p != o) {
-          p->checkCollision(o);
-        }
-      }
-
-      closeP.clear();
-
-      /* for (Particle* o : particles)
-         {
-         if (p != o)
-         {
-         p->checkCollision(o);
-         }
-         } */
-    } 
     if(frame % 5 == 1 && spawn)
     {
-      addParticle(new Particle(200, 200, 2*dt, 0, 10, 5, WHITE));
+      addParticle(new Particle(200, 200, 2*dt, 0, 5, 5, WHITE));
     }
     frame++;
   }
@@ -136,4 +163,3 @@ void Looper::addParticle(Particle* p)
   particles.push_back(p);
   qt->addParticle(p);
 }
-

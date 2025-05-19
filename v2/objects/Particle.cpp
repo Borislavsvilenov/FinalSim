@@ -51,32 +51,28 @@ void Particle::applyForce(Vec2* force)
 void Particle::handleCollision(Particle* p, Vec2* diff, float d)
 {
   float overlap = (radius + p->radius) - d;
-  diff->scale(1/d);
+
+  diff->scale(1/d); 
   diff->scale(overlap / 2);
 
   pos->sub(diff);
   p->pos->add(diff); 
 }
 
-void Particle::checkCollision(Particle* p)
+void Particle::checkCollision(Particle* p, bool m) 
 {
-  Vec2* diff = new Vec2(0, 0);
-  diff->copy(p->pos);
-  diff->sub(pos);
+  Vec2 diff(0, 0);
+  diff.copy(p->pos);
+  diff.sub(pos);
 
-  float d = diff->mag();
+  float d = diff.mag();
 
-  if(d <= radius + p->radius){
-    handleCollision(p, diff, d);
+  if(d <= radius + p->radius && m){
+    std::lock(mutex, p->mutex);
+    std::lock_guard<std::mutex> lg1(mutex, std::adopt_lock);
+    std::lock_guard<std::mutex> lg2(p->mutex, std::adopt_lock);
+    handleCollision(p, &diff, d);
+  } else if(d <= radius + p->radius) {
+    handleCollision(p, &diff, d);
   }
 }
-
-
-
-
-
-
-
-
-
-

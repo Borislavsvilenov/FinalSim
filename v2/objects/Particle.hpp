@@ -1,7 +1,11 @@
 #pragma once
 #include "Vec2.hpp"
+#include "ThreadPool.hpp"
+
+#include <mutex>
 #include <raylib.h>
 #include <iostream>
+
 
 class Particle
 {
@@ -15,6 +19,8 @@ class Particle
 
     Color color;
 
+    std::mutex mutex;
+
     Particle(float x, float y, float vx, float vy, float radius, float mass, Color color);
     ~Particle();
 
@@ -24,5 +30,5 @@ class Particle
     void applyForce(Vec2* force);
 
     void handleCollision(Particle* p, Vec2* diff, float d);
-    void checkCollision(Particle* p);
+    void checkCollision(Particle* p, bool multithreaded);
 };

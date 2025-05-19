@@ -42,5 +42,6 @@ public:
   ~Looper();
   
   void update();
+  void updateParticle(Particle* p);
   void addParticle(Particle* p);
 };

@@ -27,6 +27,7 @@ add_executable(Sim main.cpp
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_11)
 
+set(CMAKE_CXX_STANDART 23)
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
