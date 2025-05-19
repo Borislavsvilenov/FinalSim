@@ -54,7 +54,7 @@ void QT::fetch(std::vector<Particle*>& l, Box* area, ThreadPool* pool, std::mute
   }
 }
 
-void QT::fetch(std::vector<Particle*>& l, Box* area) {
+void QT::fetch(std::vector<Particle*>& l, Box* area) 
 {
   if (area->intersects(box)) {
     if (subdivided) {
@@ -72,7 +72,7 @@ void QT::fetch(std::vector<Particle*>& l, Box* area) {
   }
   return;
 }
-}
+
 
 void QT::subdivide()
 {
