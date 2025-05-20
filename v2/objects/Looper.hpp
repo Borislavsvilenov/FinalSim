@@ -14,6 +14,7 @@ class Looper
 public:
   std::vector<Particle*> particles;
   std::vector<Particle*> closeP;
+  std::vector<std::future<void>> futures;
 
   QT* qt;
   Cammera* cam;

@@ -98,11 +98,17 @@ void Looper::update()
 
     for (Particle* p : particles) {
       if (multithreaded) {
-        tp->enqueue([p, this] {updateParticle(p); });
+        futures.push_back(tp->enqueue([p, this] {updateParticle(p); }));
       } else {
         updateParticle(p);
       }
     }
+
+    for (auto& f : futures) {
+      f.get();
+    }
+
+    futures.clear();
 
     if(frame % 5 == 1 && spawn)
     {
