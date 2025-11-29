@@ -1,12 +1,27 @@
-cmake_minimum_required(VERSION 3.29)
+cmake_minimum_required(VERSION 4.2)
 project(Sim VERSION 0.1.0 LANGUAGES C CXX)
-
-find_package(raylib REQUIRED)
 
 include_directories(Sim PRIVATE objects)
 
-include(CTest)
+include(CTest FetchContent)
 enable_testing()
+
+function(include_dependency libName gitURL gitTag)
+  FetchContent_Declare(
+    ${libName}
+    GIT_REPOSITORY ${gitURL}
+    GIT_TAG ${gitTag}
+    GIT_SHALLOW TRUE
+    GIT_PROGRESS TRUE
+  )
+  FetchContent_MakeAvailable(${libName})
+endfunction()
+
+set(LIB1 raylib)
+find_package(${LIB1} QUIET)
+if (NOT ${LIB1}_FOUND)
+  include_dependency(${LIB1} http://github.com/raysan5/raylib.git 5.0)
+endif()
 
 add_executable(Sim main.cpp
   objects/Looper.cpp
@@ -24,7 +39,9 @@ add_executable(Sim main.cpp
   objects/ThreadPool.cpp
   objects/ThreadPool.hpp)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
+target_include_directories(${PROJECT_NAME} PRIVATE ${raylib_INCLUDE_DIRS})
+
+target_link_libraries(${PROJECT_NAME} PRIVATE ${LIB1})
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_11)
 
 set(CMAKE_CXX_STANDART 23)
