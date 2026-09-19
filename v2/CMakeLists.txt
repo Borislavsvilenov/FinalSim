@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 4.2)
-project(Sim VERSION 0.1.0 LANGUAGES C CXX)
+project(Falling VERSION 0.1.0 LANGUAGES C CXX)
 
-include_directories(Sim PRIVATE objects)
+include_directories(${PROJECT_NAME} PRIVATE objects)
 
 include(CTest FetchContent)
 enable_testing()
@@ -23,7 +23,7 @@ if (NOT ${LIB1}_FOUND)
   include_dependency(${LIB1} http://github.com/raysan5/raylib.git 5.0)
 endif()
 
-add_executable(Sim main.cpp
+add_executable(${PROJECT_NAME} main.cpp
   objects/Looper.cpp
   objects/Looper.hpp
   objects/Particle.cpp

@@ -7,21 +7,21 @@
 
   outputs = { self, nixpkgs, flake-utils }: {
     overlays.default = final: prev: {
-      PM = final.callPackage ({stdenv, pkgs, ...}:
+      Falling = final.callPackage ({stdenv, pkgs, ...}:
         stdenv.mkDerivation {
           src = ./.;
-          pname = "PM";
+          pname = "Falling";
           version = "unstable";
           nativeBuildInputs = with pkgs; [ cmake ];
           buildInputs = with pkgs; [
             raylib
           ];
           
-          cmakeFlags = [ "-DCMAKE_PREFIX_PATH=${pkgs.cjson}" ];
+          cmakeFlags = [ "-DCMAKE_PREFIX_PATH=${pkgs.raylib}" ];
 
           installPhase = ''
             mkdir -p $out/bin
-            cp $pname $out/bin/PM
+            cp $pname $out/bin/Falling
           '';
         }
       ) {};
@@ -37,8 +37,8 @@
     in
       {
         packages = {
-          PM = pkgs.PM;
-          default = self.packages.${system}.PM;
+          Falling = pkgs.Falling;
+          default = self.packages.${system}.Falling;
         };
 
         devShells.default = pkgs.mkShell {

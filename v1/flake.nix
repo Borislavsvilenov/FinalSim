@@ -7,21 +7,21 @@
 
   outputs = { self, nixpkgs, flake-utils }: {
     overlays.default = final: prev: {
-      PM = final.callPackage ({stdenv, pkgs, ...}:
+      grav = final.callPackage ({stdenv, pkgs, ...}:
         stdenv.mkDerivation {
           src = ./.;
-          pname = "PM";
+          pname = "Gravity";
           version = "unstable";
           nativeBuildInputs = with pkgs; [ cmake ];
           buildInputs = with pkgs; [
             raylib
           ];
           
-          cmakeFlags = [ "-DCMAKE_PREFIX_PATH=${pkgs.cjson}" ];
+          cmakeFlags = [ "-DCMAKE_PREFIX_PATH=${pkgs.raylib}" ];
 
           installPhase = ''
             mkdir -p $out/bin
-            cp $pname $out/bin/PM
+            cp $pname $out/bin/Gravity
           '';
         }
       ) {};
@@ -37,8 +37,8 @@
     in
       {
         packages = {
-          PM = pkgs.PM;
-          default = self.packages.${system}.PM;
+          grav = pkgs.grav;
+          default = self.packages.${system}.grav;
         };
 
         devShells.default = pkgs.mkShell {
